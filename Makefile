@@ -4,7 +4,7 @@ LIB = lib.a
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -I./includes
-MLXFLAGS = -L./mlx -lmlx -lX11 -lXext -lm
+MLXFLAGS = -L./mlx -lX11 -lXext -lm
 RM = rm -f
 SRC = ./main.c
 
@@ -26,3 +26,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+.SILENT:
