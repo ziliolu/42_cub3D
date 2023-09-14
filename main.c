@@ -94,9 +94,10 @@ bool ft_verify_identifiers(char *str, t_tinfo *tinfo)
 	return (true);
 }
 
-bool err(char *str)
+bool ft_err(char *str, t_root *root)
 {
 	printf("Error: %s\n", str);
+	ft_panic(root);
 	return (false);
 }
 
@@ -129,6 +130,23 @@ bool ft_add_map_file(char *line)
 	close(map_file);
 	return (true);
 }
+bool ft_str_is_map_type(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i])
+	{
+		if(str[i] != '1' && str[i] != '0' && str[i] != ' ' \
+		&& str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != '\n' && str[i] != '\t')
+		{
+			printf("map problem\n");
+			return (false);
+		}
+		i++;
+	}
+	return (true);
+}
 bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 {
 	int fd;
@@ -137,14 +155,16 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 	int copy_map;
 
 	fd = open(str, O_RDONLY);
+	copy_map = 0;
 	if(open(MAP, O_RDWR) != -1)
 		open(MAP, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 	if(fd == -1)
 		return (false);
+	line = NULL;
 	while((line = get_next_line(fd)))
 	{
 		tmp = get_trimmed_line(line);
-		if (ft_isdigit(tmp[0]))
+		if((ft_isdigit(tmp[0]) || tmp[0] == ' ' ) && ft_str_is_map_type(line))
 		{
 			if(!ft__istinfo_complete(tinfo))
 			{
@@ -158,6 +178,7 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 		else if(copy_map == 1 || (ft_strcmp(tmp, "\n") && !ft_verify_identifiers(tmp, tinfo)))
 		{
 			free(line);
+			free(tmp);
 			return (false);
 		}
 		free(tmp);
@@ -165,33 +186,111 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 	}
 	ft_print_textures(tinfo);
 	close (fd);
+	free(line);
 	return (true);
 }
 
-bool ft_initial_validation(char *str, t_tinfo *tinfo)
+void ft_create_map_arr(t_map *map)
+{
+	char **arr;
+	char *line;
+	int map_file;
+	int i;
+
+	map_file = open(MAP, O_RDONLY);
+	arr = malloc(map->n_lines * sizeof(char *));
+	i = 0;
+	while(arr[i])
+	{
+		arr[i] = malloc(map->n_col * sizeof(char));
+		i++;
+	}
+	line = NULL;
+	// while((line = get_next_line(map_file))
+	// {
+
+	// }
+}
+
+// ft_is_closed_map(char **map)
+// {
+
+// }
+
+bool ft_is_valid_map(t_map *map)
+{
+	int player;
+	int map_file;
+	char *line;
+	int i;
+
+	player = 0;
+	map_file = open(MAP, O_RDONLY);
+	if(!map_file)
+		return (false);
+	line = NULL;
+	while((line = get_next_line(map_file)))
+	{
+		i = 0;
+		while(line[i] && line[i] != '\n')
+		{
+			if(line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
+			{
+				map->player_pos[0] = map->n_col;
+				map->player_pos[1] = map->n_lines;
+				player++;
+			}
+			i++;
+		}
+		if(i > map->n_col)
+			map->n_col = i;
+		map->n_lines++;
+	}
+	ft_create_map_arr(map);
+	close(map_file);
+	printf("players: %d\n", player);
+	// return (player == 1 || ft_is_closed_map(root->map->map_arr));
+	return (player == 1);
+}
+
+
+//todas as chamadas para error sao dadas aqui, assim evitamos double frees
+bool ft_initial_validation(char *str, t_root *root)
 {
 	if (!ft_is_valid_extension(str, ".cub"))
-		return err("invalid extension");
-	if (!ft_is_valid_file(str, tinfo))
-		return err("invalid file");
+		return ft_err("invalid extension", root);
+	if (!ft_is_valid_file(str, root->tinfo))
+		return ft_err("invalid file", root);
+	if(!ft_is_valid_map(root->map))
+		return(ft_err("invalid map", root));
 	return (true);
 }
 
-int main(int argc, char **argv)
+void ft_init_structs(t_root *root)
 {
-
 	t_tinfo *tinfo;
-
+	t_map *map;
 	tinfo = malloc(sizeof(t_tinfo));
+	map = malloc(sizeof(t_map));
 
 	tinfo->north = NULL;
 	tinfo->south = NULL;
 	tinfo->east = NULL;
 	tinfo->west = NULL;
 
+	root->tinfo = tinfo;
+	root->map = map;
+}
 
+int main(int argc, char **argv)
+{
+
+	t_root *root;
+
+	root = malloc(sizeof(t_root));
+	ft_init_structs(root);
 	if (argc != 2)
-		return (1);
-	if(!ft_initial_validation(argv[1], tinfo))
+		return (ft_panic(root));
+	if(!ft_initial_validation(argv[1], root))
 		return (1);
 }

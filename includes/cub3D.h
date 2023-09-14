@@ -22,6 +22,21 @@ typedef struct s_tinfo
 	int		ceil[3];
 }				t_tinfo;
 
+typedef struct s_map
+{
+	char **map_arr;
+	int n_col;
+	int n_lines;
+	int player_pos[2];
+}				t_map;
+
+typedef struct s_root
+{
+	t_tinfo *tinfo;
+	t_map	*map;
+}				t_root;
+
 void ft_print_textures(t_tinfo *tinfo);
+int ft_panic(t_root *root);
 
 #endif

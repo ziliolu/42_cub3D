@@ -9,6 +9,7 @@ RM = rm -f
 
 SRC =	./main.c							\
 		./src/print/ft_print_textures.c 	\
+		./src/free/ft_panic.c						
 
 all: $(NAME)
 
