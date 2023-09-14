@@ -47,7 +47,14 @@ bool ft_add_rgb(char *path, int colors[3])
 
 bool ft_add_paths(char *id, char *path, t_tinfo *tinfo)
 {
-	if(!ft_strcmp(id, "NO") && !tinfo->north)
+	
+	if(!ft_strcmp(id, "F"))
+		return (ft_add_rgb(path, tinfo->floor));
+	else if(!ft_strcmp(id, "C"))
+		return (ft_add_rgb(path, tinfo->ceil));
+	if(open(path, O_RDONLY) == -1 || !ft_is_valid_extension(path, ".xpm"))
+		return (false); 
+	else if(!ft_strcmp(id, "NO") && !tinfo->north)
 		tinfo->north = path;
 	else if(!ft_strcmp(id, "SO") && !tinfo->south)
 		tinfo->south = path;
@@ -55,10 +62,6 @@ bool ft_add_paths(char *id, char *path, t_tinfo *tinfo)
 		tinfo->west = path;
 	else if(!ft_strcmp(id, "EA") && !tinfo->east)
 		tinfo->east = path;
-	else if(!ft_strcmp(id, "F"))
-		return (ft_add_rgb(path, tinfo->floor));
-	else if(!ft_strcmp(id, "C"))
-		return (ft_add_rgb(path, tinfo->ceil));
 	return (true);
 }
 bool ft_valid_identifier(char *id, char *path, t_tinfo *tinfo)
@@ -108,15 +111,34 @@ char *get_trimmed_line(char *line)
 	return (tmp1);
 }
 
+bool ft__istinfo_complete(t_tinfo *tinfo)
+{
+	//falta verificar floor e ceiling
+	if(tinfo->north && tinfo->south && tinfo->west && tinfo->east) 
+		return (true);
+	return (false);
+}
+
+bool ft_add_map_file(char *line)
+{
+	int map_file;
+	map_file = open(MAP, O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
+	if(!map_file)
+		return (false);
+	write(map_file, line, ft_strlen(line));
+	close(map_file);
+	return (true);
+}
 bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 {
 	int fd;
-	/* int map_file; */
 	char *line;
 	char *tmp;
+	int copy_map;
 
 	fd = open(str, O_RDONLY);
-	/* map_file = open(MAP, O_CREAT | O_RDWR | O_APPEND); */
+	if(open(MAP, O_RDWR) != -1)
+		open(MAP, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 	if(fd == -1)
 		return (false);
 	while((line = get_next_line(fd)))
@@ -124,26 +146,24 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 		tmp = get_trimmed_line(line);
 		if (ft_isdigit(tmp[0]))
 		{
-			free(tmp);
-			break;
+			if(!ft__istinfo_complete(tinfo))
+			{
+				free(tmp);
+				free(line);
+				return (false);
+			}
+			copy_map = 1;
+			ft_add_map_file(line);
 		}
-		if(ft_strcmp(line, "\n") && !ft_verify_identifiers(line, tinfo))
+		else if(copy_map == 1 || (ft_strcmp(tmp, "\n") && !ft_verify_identifiers(tmp, tinfo)))
 		{
 			free(line);
-			return (err("invalid identifier"));
+			return (false);
 		}
+		free(tmp);
 		free(line);
 	}
-	printf("NO: %s\n", tinfo->north);
-	printf("SO: %s\n", tinfo->south);
-	printf("WE: %s\n", tinfo->west);
-	printf("EA: %s\n", tinfo->east);
-	printf("FLOOR 0: %d\n", tinfo->floor[0]);
-	printf("FLOOR 1: %d\n", tinfo->floor[1]);
-	printf("FLOOR 2: %d\n", tinfo->floor[2]);
-	printf("CEIL 0: %d\n", tinfo->ceil[0]);
-	printf("CEIL 1: %d\n", tinfo->ceil[1]);
-	printf("CEIL 2: %d\n", tinfo->ceil[2]);
+	ft_print_textures(tinfo);
 	close (fd);
 	return (true);
 }
@@ -168,6 +188,8 @@ int main(int argc, char **argv)
 	tinfo->south = NULL;
 	tinfo->east = NULL;
 	tinfo->west = NULL;
+
+
 	if (argc != 2)
 		return (1);
 	if(!ft_initial_validation(argv[1], tinfo))

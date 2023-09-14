@@ -6,7 +6,9 @@ CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -I./includes
 MLXFLAGS = -L./mlx -lX11 -lXext -lm
 RM = rm -f
-SRC = ./main.c
+
+SRC =	./main.c							\
+		./src/print/ft_print_textures.c 	\
 
 all: $(NAME)
 

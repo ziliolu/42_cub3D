@@ -6,6 +6,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <unistd.h>
 # include "../lib/libft/libft.h"
 # include "../lib/get_next_line/get_next_line.h"
 
@@ -20,5 +21,7 @@ typedef struct s_tinfo
 	int		floor[3];
 	int		ceil[3];
 }				t_tinfo;
+
+void ft_print_textures(t_tinfo *tinfo);
 
 #endif
