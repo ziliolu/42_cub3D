@@ -193,11 +193,11 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 void ft_create_map_arr(t_map *map)
 {
 	char **arr;
-	char *line;
-	int map_file;
+	//char *line;
+	//int map_file;
 	int i;
 
-	map_file = open(MAP, O_RDONLY);
+	//map_file = open(MAP, O_RDONLY);
 	arr = malloc(map->n_lines * sizeof(char *));
 	i = 0;
 	while(arr[i])
@@ -205,7 +205,7 @@ void ft_create_map_arr(t_map *map)
 		arr[i] = malloc(map->n_col * sizeof(char));
 		i++;
 	}
-	line = NULL;
+	//line = NULL;
 	// while((line = get_next_line(map_file))
 	// {
 
