@@ -12,7 +12,5 @@
 - [x] has just one player
 - [x] map just has acceptable characters
 - [x] map array creation with - instead of white spaces 
-- [ ] surrounded by walls
+- [x] surrounded by walls
 - [ ] player can navigate on the map - floodfill (?)
-
-

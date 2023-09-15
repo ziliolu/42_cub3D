@@ -193,6 +193,21 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 	return (true);
 }
 
+void ft_fill_and_replace(t_map *map, int i, int *j)
+{
+	int index;
+
+	index = -1;
+	while (map->map_arr[i][++index])
+	{
+		if (map->map_arr[i][index] == ' ')
+			map->map_arr[i][index] = '-';
+	}
+
+	while (*j < map->n_col)
+		map->map_arr[i][(*j)++] = '-';
+}
+
 void ft_create_map_arr(t_map *map)
 {
 	int map_file;
@@ -213,14 +228,12 @@ void ft_create_map_arr(t_map *map)
 	while((line = get_next_line(map_file)))
 	{
 		j = 0;
-		while(j < map->n_col)
+		while (line[j] && line[j] != '\n')
 		{
-			if (line[j] && line[j] != ' ' && line[j] != '\n' && (i != map->n_lines)) 
-				map->map_arr[i][j] = line[j];
-			else
-				map->map_arr[i][j] = '-';
+			map->map_arr[i][j] = line[j];
 			j++;
 		}
+		ft_fill_and_replace(map, i, &j);
 		map->map_arr[i][j] = '\0';
 		free(line);
 		i++;
@@ -228,28 +241,35 @@ void ft_create_map_arr(t_map *map)
 	free(line);
 }
 
-bool ft_check_all_sides(char **map, int y, int x)
+bool ft_check_all_sides(t_map *map, int y, int x)
 {
-	if(map[y - 1][x] == '-' || map[y + 1][x] == '-' || map[y][x - 1] == '-' || map[y][x + 1] == '-')
+	if (y == 0 || y == map->n_lines - 1 || x == 0 || y == map->n_col - 1)
 	{
-		printf("pos do character: [%d,%d] = %d\n", y,x, map[y][x]);
+		printf("pos do character: [%d,%d] = %c\n", y,x, map->map_arr[y][x]);
+		return (false);
+	}
+
+	if(map->map_arr[y - 1][x] == '-' || map->map_arr[y + 1][x] == '-' || map->map_arr[y][x - 1] == '-' || map->map_arr[y][x + 1] == '-')
+	{
+		printf("pos do character: [%d,%d] = %c\n", y,x, map->map_arr[y][x]);
 		return (false);
 	}
 	return (true);
 }
-bool ft_is_closed_map(char **map)
+
+bool ft_is_closed_map(t_map *map)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while(map[i])
+	while(map->map_arr[i])
 	{
 		j = 0;
-		while(map[i][j])
+		while(map->map_arr[i][j])
 		{
-			if(map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' \
-			|| map[i][j] == 'E' || map[i][j] == 'W')
+			if(map->map_arr[i][j] == '0' || map->map_arr[i][j] == 'N' || map->map_arr[i][j] == 'S' \
+			|| map->map_arr[i][j] == 'E' || map->map_arr[i][j] == 'W')
 				if (!ft_check_all_sides(map, i, j))
 					return (false);
 			j++;
@@ -290,8 +310,7 @@ bool ft_is_valid_map(t_map *map)
 	}
 	close(map_file);
 	ft_create_map_arr(map);
-	ft_print_arr(map->map_arr);
-	return (player == 1 && ft_is_closed_map(map->map_arr));
+	return (player == 1 && ft_is_closed_map(map));
 }
 
 
