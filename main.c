@@ -188,7 +188,6 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 		free(tmp);
 		free(line);
 	}
-	ft_print_textures(tinfo);
 	close (fd);
 	free(line);
 	return (true);
@@ -206,7 +205,7 @@ void ft_create_map_arr(t_map *map)
 	i = 0;
 	while(i < map->n_lines)
 	{
-		map->map_arr[i] = malloc(map->n_col * sizeof(char));
+		map->map_arr[i] = calloc(sizeof(char), map->n_col);
 		i++;
 	}
 	line = NULL;
@@ -216,7 +215,7 @@ void ft_create_map_arr(t_map *map)
 		j = 0;
 		while(j < map->n_col)
 		{
-			if (line[j] && line[j] != ' ' && line[j] != '\n') 
+			if (line[j] && line[j] != ' ' && line[j] != '\n' && (i != map->n_lines)) 
 				map->map_arr[i][j] = line[j];
 			else
 				map->map_arr[i][j] = '-';
@@ -227,13 +226,38 @@ void ft_create_map_arr(t_map *map)
 		i++;
 	}
 	free(line);
-	ft_print_arr(map->map_arr);
 }
 
-// ft_is_closed_map(char **map)
-// {
+bool ft_check_all_sides(char **map, int y, int x)
+{
+	if(map[y - 1][x] == '-' || map[y + 1][x] == '-' || map[y][x - 1] == '-' || map[y][x + 1] == '-')
+	{
+		printf("pos do character: [%d,%d] = %d\n", y,x, map[y][x]);
+		return (false);
+	}
+	return (true);
+}
+bool ft_is_closed_map(char **map)
+{
+	int i;
+	int j;
 
-// }
+	i = 0;
+	while(map[i])
+	{
+		j = 0;
+		while(map[i][j])
+		{
+			if(map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' \
+			|| map[i][j] == 'E' || map[i][j] == 'W')
+				if (!ft_check_all_sides(map, i, j))
+					return (false);
+			j++;
+		}
+		i++;
+	}
+	return (true);
+}
 
 bool ft_is_valid_map(t_map *map)
 {
@@ -265,12 +289,9 @@ bool ft_is_valid_map(t_map *map)
 		map->n_lines++;
 	}
 	close(map_file);
-	printf("players: %d\n", player);
-	printf("lines: %d\n", map->n_lines);
-	printf("cols: %d\n", map->n_col);
 	ft_create_map_arr(map);
-	// return (player == 1 || ft_is_closed_map(root->map->map_arr));
-	return (player == 1);
+	ft_print_arr(map->map_arr);
+	return (player == 1 && ft_is_closed_map(map->map_arr));
 }
 
 
@@ -312,5 +333,10 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_panic(root));
 	if(!ft_initial_validation(argv[1], root))
+	{
+		//ft_print_info(root);
 		return (1);
+	}
+	ft_print_info(root);
+
 }

@@ -39,5 +39,6 @@ typedef struct s_root
 void ft_print_textures(t_tinfo *tinfo);
 int ft_panic(t_root *root);
 void ft_print_arr(char **arr);
+void ft_print_info(t_root *root);
 
 #endif
