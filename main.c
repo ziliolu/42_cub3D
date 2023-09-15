@@ -126,7 +126,14 @@ bool ft_add_map_file(char *line)
 	map_file = open(MAP, O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
 	if(!map_file)
 		return (false);
-	write(map_file, line, ft_strlen(line));
+	while(*line)
+	{
+		if(*line == '\t')
+			write(map_file, "    ", 4);
+		else
+			write(map_file, line, 1);
+		line++;	
+	}
 	close(map_file);
 	return (true);
 }
@@ -139,10 +146,7 @@ bool ft_str_is_map_type(char *str)
 	{
 		if(str[i] != '1' && str[i] != '0' && str[i] != ' ' \
 		&& str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != '\n' && str[i] != '\t')
-		{
-			printf("map problem\n");
 			return (false);
-		}
 		i++;
 	}
 	return (true);
@@ -192,24 +196,38 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 
 void ft_create_map_arr(t_map *map)
 {
-	char **arr;
-	//char *line;
-	//int map_file;
+	int map_file;
+	char *line;
 	int i;
+	int j;
 
-	//map_file = open(MAP, O_RDONLY);
-	arr = malloc(map->n_lines * sizeof(char *));
+	map_file = open(MAP, O_RDONLY);
+	map->map_arr = calloc(sizeof(char *), map->n_lines + 1);
 	i = 0;
-	while(arr[i])
+	while(i < map->n_lines)
 	{
-		arr[i] = malloc(map->n_col * sizeof(char));
+		map->map_arr[i] = malloc(map->n_col * sizeof(char));
 		i++;
 	}
-	//line = NULL;
-	// while((line = get_next_line(map_file))
-	// {
-
-	// }
+	line = NULL;
+	i = 0;
+	while((line = get_next_line(map_file)))
+	{
+		j = 0;
+		while(j < map->n_col)
+		{
+			if (line[j] && line[j] != ' ' && line[j] != '\n') 
+				map->map_arr[i][j] = line[j];
+			else
+				map->map_arr[i][j] = '-';
+			j++;
+		}
+		map->map_arr[i][j] = '\0';
+		free(line);
+		i++;
+	}
+	free(line);
+	ft_print_arr(map->map_arr);
 }
 
 // ft_is_closed_map(char **map)
@@ -246,9 +264,11 @@ bool ft_is_valid_map(t_map *map)
 			map->n_col = i;
 		map->n_lines++;
 	}
-	ft_create_map_arr(map);
 	close(map_file);
 	printf("players: %d\n", player);
+	printf("lines: %d\n", map->n_lines);
+	printf("cols: %d\n", map->n_col);
+	ft_create_map_arr(map);
 	// return (player == 1 || ft_is_closed_map(root->map->map_arr));
 	return (player == 1);
 }

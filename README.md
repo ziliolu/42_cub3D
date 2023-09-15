@@ -3,9 +3,10 @@
 ## file 
 - [x] file extension (.cub)
 - [x] map that exists and can be opened 
-- [x] dataa order (identifiers before map)
+- [x] data order (identifiers before map)
 - [x] textures' files open and are right extension (xpm)
 - [] floor and ceiling colors are in rgb right format
+- [] tratamento de 1 tab = 4 espacos
 
 ## map
 - [x] has just one player
