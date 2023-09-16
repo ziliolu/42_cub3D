@@ -4,14 +4,20 @@ LIB = lib.a
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -I./includes
-MLXFLAGS = -L./mlx -lm #-lX11 -lXext -lm
+MLXFLAGS = -g -L./mlx -lmlx -lXext -lX11 -lm -lbsd 
 RM = rm -f
 
-SRC =	./main.c							\
-		./src/print/ft_print_textures.c 	\
-		./src/print/ft_print_arr.c			\
-		./src/print/ft_print_info.c			\
-		./src/free/ft_panic.c						
+SRC =	./main.c									\
+		./src/print/ft_print_textures.c 			\
+		./src/print/ft_print_arr.c					\
+		./src/print/ft_print_info.c					\
+		./src/free/ft_panic.c						\
+		./src/validations/valid_file.c				\
+		./src/validations/valid_identifiers.c		\
+		./src/validations/valid_map.c				\
+		./src/utils/ft_err.c						\
+		./src/utils/ft_get_trimmed_line.c				
+
 
 all: $(NAME)
 
