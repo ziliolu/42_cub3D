@@ -23,18 +23,30 @@ typedef struct s_tinfo
 	int		ceil[3];
 }				t_tinfo;
 
+typedef struct s_data 
+{
+	void *img;
+	char *addr;
+	int bits_per_pixel;
+	int line_length;
+	int endian;
+}				t_data;
+
 typedef struct s_map
 {
 	char **map_arr;
 	int n_col;
 	int n_lines;
 	int player_pos[2];
+	t_data imgs[3];
 }				t_map;
 
 typedef struct s_mlx
 {
 	void *mlx;
 	void *win;
+	t_data floor;
+	t_data wall;
 }				t_mlx;
 
 typedef struct s_root
@@ -52,7 +64,7 @@ void ft_print_info(t_root *root);
 bool ft_add_rgb(char *path, int colors[3]);
 bool ft_is_valid_extension(char *str, char *extension);
 bool ft_err(char *str, t_root *root);
-bool ft_is_valid_file(char *str, t_tinfo *tinfo);
+bool ft_is_valid_file(char *str, t_root *root);
 bool ft_is_valid_map(t_map *map);
 char *ft_get_trimmed_line(char *line);
 bool ft_str_is_map_type(char *str);
@@ -60,4 +72,7 @@ bool ft__istinfo_complete(t_tinfo *tinfo);
 bool ft_initial_validation(char *str, t_root *root);
 bool ft_verify_identifiers(char *str, t_root *root);
 bool ft_add_map_file(char *line);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void ft_render_mini_map(t_root *root);
+t_data ft_create_square_img(t_mlx *mlx, int color);
 #endif

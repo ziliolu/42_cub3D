@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_trimmed_line.c                              :+:      :+:    :+:   */
+/*   my_mlx_pixel_put.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/16 16:56:56 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/18 17:12:29 by lpicoli-         ###   ########.fr       */
+/*   Created: 2023/09/18 16:04:19 by lpicoli-          #+#    #+#             */
+/*   Updated: 2023/09/18 17:12:14 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-char *ft_get_trimmed_line(char *line)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-	char *tmp;
-	char *tmp1;
+	char	*dst;
 
-	tmp = ft_strtrim(line, " ");
-	tmp1 = ft_strtrim(tmp, "\t");
-	free(tmp);
-	return (tmp1);
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
 }

@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:00 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/16 16:59:44 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/09/18 18:03:00 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool ft_is_valid_extension(char *str, char *extension)
 	return (false);
 }
 
-bool ft_is_valid_file(char *str, t_tinfo *tinfo)
+bool ft_is_valid_file(char *str, t_root *root)
 {
 	int fd;
 	char *line;
@@ -47,7 +47,7 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 		tmp = ft_get_trimmed_line(line);
 		if((ft_isdigit(tmp[0]) || tmp[0] == ' ' ) && ft_str_is_map_type(line))
 		{
-			if(!ft__istinfo_complete(tinfo))
+			if(!ft__istinfo_complete(root->tinfo))
 			{
 				free(tmp);
 				free(line);
@@ -56,7 +56,7 @@ bool ft_is_valid_file(char *str, t_tinfo *tinfo)
 			copy_map = 1;
 			ft_add_map_file(line);
 		}
-		else if(copy_map == 1 || (ft_strcmp(tmp, "\n") && !ft_verify_identifiers(tmp, tinfo)))
+		else if(copy_map == 1 || (ft_strcmp(tmp, "\n") && !ft_verify_identifiers(tmp, root)))
 		{
 			free(line);
 			free(tmp);
@@ -75,7 +75,7 @@ bool ft_initial_validation(char *str, t_root *root)
 {
 	if (!ft_is_valid_extension(str, ".cub"))
 		return ft_err("invalid extension", root);
-	if (!ft_is_valid_file(str, root->tinfo))
+	if (!ft_is_valid_file(str, root))
 		return ft_err("invalid file", root);
 	if(!ft_is_valid_map(root->map))
 		return(ft_err("invalid map", root));

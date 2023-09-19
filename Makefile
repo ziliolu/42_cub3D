@@ -16,7 +16,10 @@ SRC =	./main.c									\
 		./src/validations/valid_identifiers.c		\
 		./src/validations/valid_map.c				\
 		./src/utils/ft_err.c						\
-		./src/utils/ft_get_trimmed_line.c				
+		./src/utils/ft_get_trimmed_line.c			\
+		./src/raycaster/my_mlx_pixel_put.c			\
+		./src/raycaster/ft_display_player.c			\
+
 
 
 all: $(NAME)
