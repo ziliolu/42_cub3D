@@ -17,7 +17,6 @@ void ft_init_structs(t_root *root)
 
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, 1920, 1080, "Cub3D");
-
 	root->tinfo = tinfo;
 	root->map = map;
 	root->mlx = mlx;

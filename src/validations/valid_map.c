@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/18 17:12:19 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/09/19 14:37:01 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void ft_fill_and_replace(t_map *map, int i, int *j)
 	while (map->map_arr[i][++index])
 	{
 		if (map->map_arr[i][index] == ' ')
-			map->map_arr[i][index] = '-';
+			map->map_arr[i][index] = '0';
 	}
 
 	while (*j < map->n_col)

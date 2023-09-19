@@ -12,6 +12,7 @@
 # include "../mlx/mlx.h"
 
 # define MAP "map_file"
+# define SQUARE_SIZE 32
 
 typedef struct s_tinfo
 {
@@ -75,4 +76,5 @@ bool ft_add_map_file(char *line);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void ft_render_mini_map(t_root *root);
 t_data ft_create_square_img(t_mlx *mlx, int color);
+void ft_create_map_images(t_root *root);
 #endif
