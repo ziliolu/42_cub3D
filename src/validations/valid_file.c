@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:00 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/18 18:03:00 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:40:23 by riolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ bool ft_initial_validation(char *str, t_root *root)
 		return ft_err("invalid extension", root);
 	if (!ft_is_valid_file(str, root))
 		return ft_err("invalid file", root);
-	if(!ft_is_valid_map(root->map))
+	if(!ft_is_valid_map(root->map, root->player))
 		return(ft_err("invalid map", root));
 	return (true);
 }

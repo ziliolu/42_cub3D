@@ -12,7 +12,7 @@ void	ft_init_structs(t_root *root)
 	map = malloc(sizeof(t_map));
 	mlx = malloc(sizeof(t_mlx));
 	player = malloc(sizeof(t_player));
-	rays = malloc(sizeof(t_ray) * (SCREEN_WIDTH / FOV));
+	rays = malloc(sizeof(t_ray) * SCREEN_WIDTH);
 
 	tinfo->north = NULL;
 	tinfo->south = NULL;

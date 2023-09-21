@@ -10,6 +10,7 @@
 # include "../lib/libft/libft.h"
 # include "../lib/get_next_line/get_next_line.h"
 # include "../mlx/mlx.h"
+# include <math.h>
 
 # define MAP "map_file"
 # define SCREEN_WIDTH 1920
@@ -18,6 +19,10 @@
 # define FOV 60
 # define FLOOR_COLOR 0x00808080
 # define CEILING_COLOR 0x005A5A5A
+# define ROTATION 10
+# define SPEED 0.2
+# define PI 3.14159265359 
+
 
 typedef struct s_tinfo
 {
@@ -42,13 +47,15 @@ typedef struct s_player
 {
 	double x;
 	double y;
-	double dirX;
-	double dirY;
+	double direction;
 	double speed;
+	double rotation;
 }				t_player;
 
 typedef struct s_ray
 {
+	double x;
+	double y;
 	double dis_wall;
 	double angle;
 }				t_ray;
@@ -58,7 +65,6 @@ typedef struct s_map
 	char **map_arr;
 	int n_col;
 	int n_lines;
-	int player_pos[2];
 	t_data imgs[3];
 }				t_map;
 
@@ -89,7 +95,7 @@ bool ft_add_rgb(char *path, int colors[3]);
 bool ft_is_valid_extension(char *str, char *extension);
 bool ft_err(char *str, t_root *root);
 bool ft_is_valid_file(char *str, t_root *root);
-bool ft_is_valid_map(t_map *map);
+bool ft_is_valid_map(t_map *map, t_player *player);
 char *ft_get_trimmed_line(char *line);
 bool ft_str_is_map_type(char *str);
 bool ft__istinfo_complete(t_tinfo *tinfo);
@@ -101,5 +107,6 @@ void ft_render_mini_map(t_mlx *mlx, t_map *map);
 t_data ft_create_square_img(t_mlx *mlx, int color);
 void ft_create_map_images(t_mlx *mlx, t_map *map);
 void ft_render_map(t_root *root);
+bool is_player(char c);
 
 #endif

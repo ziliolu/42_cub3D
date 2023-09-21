@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/19 14:37:01 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/09/21 14:40:18 by riolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,30 @@ void ft_create_map_arr(t_map *map)
 	free(line);
 }
 
-bool ft_is_valid_map(t_map *map)
+
+bool ft_init_player(char c, t_map *map, t_player *player)
 {
-	int player;
+	static int n_player;
+
+	if (++n_player > 1)
+		return (false);
+	player->x = map->n_col;
+	player->y = map->n_lines;
+	player->rotation = ROTATION;
+	player->speed = SPEED;
+	if (c == 'N')
+		player->direction = 0;
+	else
+		player->direction = 0;
+	return (true);
+}
+
+bool ft_is_valid_map(t_map *map, t_player *player)
+{
 	int map_file;
 	char *line;
 	int i;
 
-	player = 0;
 	map_file = open(MAP, O_RDONLY);
 	if(!map_file)
 		return (false);
@@ -128,12 +144,8 @@ bool ft_is_valid_map(t_map *map)
 		i = 0;
 		while(line[i] && line[i] != '\n')
 		{
-			if(line[i] == 'N' || line[i] == 'E' || line[i] == 'S' || line[i] == 'W')
-			{
-				map->player_pos[0] = map->n_col;
-				map->player_pos[1] = map->n_lines;
-				player++;
-			}
+			if(is_player(line[i]) && !ft_init_player(line[i], map, player))
+				return (false);
 			i++;
 		}
 		if(i > map->n_col)
@@ -142,7 +154,7 @@ bool ft_is_valid_map(t_map *map)
 	}
 	close(map_file);
 	ft_create_map_arr(map);
-	return (player == 1 && ft_is_closed_map(map));
+	return (ft_is_closed_map(map));
 }
 
 bool ft_add_map_file(char *line)
