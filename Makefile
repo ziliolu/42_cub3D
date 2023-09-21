@@ -19,7 +19,7 @@ SRC =	./main.c									\
 		./src/utils/ft_get_trimmed_line.c			\
 		./src/raycaster/my_mlx_pixel_put.c			\
 		./src/raycaster/ft_display_player.c			\
-
+		./src/render_map/render_map.c
 
 
 all: $(NAME)

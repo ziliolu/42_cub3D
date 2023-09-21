@@ -12,7 +12,12 @@
 # include "../mlx/mlx.h"
 
 # define MAP "map_file"
-# define SQUARE_SIZE 32
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
+# define SQUARE_SIZE 16
+# define FOV 60
+# define FLOOR_COLOR 0x00808080
+# define CEILING_COLOR 0x005A5A5A
 
 typedef struct s_tinfo
 {
@@ -33,6 +38,21 @@ typedef struct s_data
 	int endian;
 }				t_data;
 
+typedef struct s_player
+{
+	double x;
+	double y;
+	double dirX;
+	double dirY;
+	double speed;
+}				t_player;
+
+typedef struct s_ray
+{
+	double dis_wall;
+	double angle;
+}				t_ray;
+
 typedef struct s_map
 {
 	char **map_arr;
@@ -48,13 +68,16 @@ typedef struct s_mlx
 	void *win;
 	t_data floor;
 	t_data wall;
+	t_data map;
 }				t_mlx;
 
 typedef struct s_root
 {
-	t_tinfo *tinfo;
-	t_map	*map;
-	t_mlx	*mlx;
+	t_tinfo 	*tinfo;
+	t_map		*map;
+	t_mlx		*mlx;
+	t_player	*player;
+	t_ray		*rays;
 }				t_root;
 
 
@@ -74,7 +97,9 @@ bool ft_initial_validation(char *str, t_root *root);
 bool ft_verify_identifiers(char *str, t_root *root);
 bool ft_add_map_file(char *line);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void ft_render_mini_map(t_root *root);
+void ft_render_mini_map(t_mlx *mlx, t_map *map);
 t_data ft_create_square_img(t_mlx *mlx, int color);
-void ft_create_map_images(t_root *root);
+void ft_create_map_images(t_mlx *mlx, t_map *map);
+void ft_render_map(t_root *root);
+
 #endif
