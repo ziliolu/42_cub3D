@@ -9,6 +9,6 @@ void ft_print_info(t_root *root)
     printf("\n----------------------------------\n");
     printf("Number of columns: %d\n", root->map->n_col);
     printf("Number of lines: %d\n", root->map->n_lines);
-    printf("Player position: %d,%d\n", root->map->player_pos[0], root->map->player_pos[1]);
+    printf("Player position: %f,%f\n", root->player->x, root->player->y);
 
 }

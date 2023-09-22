@@ -19,8 +19,7 @@
 # define FOV 60
 # define FLOOR_COLOR 0x00808080
 # define CEILING_COLOR 0x005A5A5A
-# define ROTATION 10
-# define SPEED 0.2
+# define MAX 1e30 
 # define PI 3.14159265359 
 
 
@@ -47,17 +46,24 @@ typedef struct s_player
 {
 	double x;
 	double y;
-	double direction;
-	double speed;
-	double rotation;
+	double plane_x;
+	double plane_y;
+	double dir_x;
+	double dir_y;
 }				t_player;
 
 typedef struct s_ray
 {
-	double x;
-	double y;
-	double dis_wall;
-	double angle;
+	double ray_dir_x;
+	double ray_dir_y;
+	double side_dist_x;
+	double side_dist_y;
+	double delta_dis_x;
+	double delta_dis_y;
+	int step_x; //what direction to step in x or y-direction (either +1 or -1)
+	int step_y;//what direction to step in x or y-direction (either +1 or -1)
+	double per_wall_dist;
+	
 }				t_ray;
 
 typedef struct s_map
@@ -66,6 +72,8 @@ typedef struct s_map
 	int n_col;
 	int n_lines;
 	t_data imgs[3];
+	int		map_x;
+	int		map_y;
 }				t_map;
 
 typedef struct s_mlx
@@ -79,11 +87,14 @@ typedef struct s_mlx
 
 typedef struct s_root
 {
+	double		wall_num;
+	double		camera_x;
 	t_tinfo 	*tinfo;
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
 	t_ray		*rays;
+	t_ray *ray;
 }				t_root;
 
 
@@ -108,5 +119,6 @@ t_data ft_create_square_img(t_mlx *mlx, int color);
 void ft_create_map_images(t_mlx *mlx, t_map *map);
 void ft_render_map(t_root *root);
 bool is_player(char c);
+void ft_cast_rays(t_root *root);
 
 #endif
