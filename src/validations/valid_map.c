@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/21 14:40:18 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/09/22 17:09:45 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,16 +116,11 @@ bool ft_init_player(char c, t_map *map, t_player *player)
 {
 	static int n_player;
 
+	(void)c;
 	if (++n_player > 1)
 		return (false);
 	player->x = map->n_col;
 	player->y = map->n_lines;
-	player->rotation = ROTATION;
-	player->speed = SPEED;
-	if (c == 'N')
-		player->direction = 0;
-	else
-		player->direction = 0;
 	return (true);
 }
 

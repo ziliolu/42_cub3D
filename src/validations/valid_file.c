@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:00 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/21 14:40:23 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/09/23 12:25:19 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ bool ft_is_valid_extension(char *str, char *extension)
 	if (ft_strncmp(str, extension, ext_len) == 0)
 		return (true);
 	return (false);
+}
+bool ft_istinfo_complete(t_tinfo *tinfo)
+{
+	//falta verificar floor e ceiling
+	if(!tinfo->north || !tinfo->south || !tinfo->west || !tinfo->east) 
+		return (false);
+	return (true);
 }
 
 bool ft_is_valid_file(char *str, t_root *root)
@@ -47,7 +54,7 @@ bool ft_is_valid_file(char *str, t_root *root)
 		tmp = ft_get_trimmed_line(line);
 		if((ft_isdigit(tmp[0]) || tmp[0] == ' ' ) && ft_str_is_map_type(line))
 		{
-			if(!ft__istinfo_complete(root->tinfo))
+			if(!ft_istinfo_complete(root->tinfo))
 			{
 				free(tmp);
 				free(line);

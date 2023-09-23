@@ -4,7 +4,7 @@ LIB = lib.a
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -I./includes
-MLXFLAGS = -g -L./mlx -lmlx -lXext -lX11 -lm -lbsd 
+MLXFLAGS = -g -L./mlx -lmlx -lXext -lX11 -lm #-lbsd
 RM = rm -f
 
 SRC =	./main.c									\
@@ -19,8 +19,10 @@ SRC =	./main.c									\
 		./src/utils/ft_get_trimmed_line.c			\
 		./src/raycaster/my_mlx_pixel_put.c			\
 		./src/raycaster/ft_display_player.c			\
-		./src/render_map/render_map.c
-
+		./src/raycaster/render_map.c				\
+		./src/raycaster/rays.c						\
+		./src/raycaster/print_rays.c				\
+		./src/raycaster/dda_algorithm.c
 
 all: $(NAME)
 

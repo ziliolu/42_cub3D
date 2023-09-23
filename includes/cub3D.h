@@ -12,15 +12,16 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 
+# define FOV 60
+# define FLOOR_COLOR 0x00808080
+# define CEILING_COLOR 0x005A5A5A
+# define MAX 1e30
+# define PI 3.14159265359
 # define MAP "map_file"
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define SQUARE_SIZE 16
-# define FOV 60
-# define FLOOR_COLOR 0x00808080
-# define CEILING_COLOR 0x005A5A5A
-# define MAX 1e30 
-# define PI 3.14159265359 
+
 
 
 typedef struct s_tinfo
@@ -89,12 +90,12 @@ typedef struct s_root
 {
 	double		wall_num;
 	double		camera_x;
+    int         hit_wall;
 	t_tinfo 	*tinfo;
+    t_ray		*ray;
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
-	t_ray		*rays;
-	t_ray *ray;
 }				t_root;
 
 
@@ -109,7 +110,7 @@ bool ft_is_valid_file(char *str, t_root *root);
 bool ft_is_valid_map(t_map *map, t_player *player);
 char *ft_get_trimmed_line(char *line);
 bool ft_str_is_map_type(char *str);
-bool ft__istinfo_complete(t_tinfo *tinfo);
+bool ft_istinfo_complete(t_tinfo *tinfo);
 bool ft_initial_validation(char *str, t_root *root);
 bool ft_verify_identifiers(char *str, t_root *root);
 bool ft_add_map_file(char *line);
@@ -117,8 +118,12 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void ft_render_mini_map(t_mlx *mlx, t_map *map);
 t_data ft_create_square_img(t_mlx *mlx, int color);
 void ft_create_map_images(t_mlx *mlx, t_map *map);
-void ft_render_map(t_root *root);
+void ft_render_map_background(t_root *root);
 bool is_player(char c);
 void ft_cast_rays(t_root *root);
-
+void ft_init_rays(t_root *root, t_player *player);
+void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map);
+void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map);
+void ft_set_ray_length(t_ray *ray);
+void ft_draw(t_ray *ray, t_mlx *mlx, int i);
 #endif

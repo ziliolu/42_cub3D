@@ -6,13 +6,13 @@ void	ft_init_structs(t_root *root)
 	t_map		*map;
 	t_mlx		 *mlx;
 	t_player	*player;
-	t_ray		*rays;
+	t_ray		*ray;
 
 	tinfo = malloc(sizeof(t_tinfo));
 	map = malloc(sizeof(t_map));
 	mlx = malloc(sizeof(t_mlx));
 	player = malloc(sizeof(t_player));
-	rays = malloc(sizeof(t_ray) * SCREEN_WIDTH);
+	ray = malloc(sizeof(t_ray));
 
 	tinfo->north = NULL;
 	tinfo->south = NULL;
@@ -25,7 +25,7 @@ void	ft_init_structs(t_root *root)
 	root->map = map;
 	root->mlx = mlx;
 	root->player = player;
-	root->rays = rays;
+	root->ray = ray;
 }
 
 int main(int argc, char **argv)
@@ -39,9 +39,9 @@ int main(int argc, char **argv)
 		return (ft_panic(root));
 	if(!ft_initial_validation(argv[1], root))
 		return (1);
-	ft_render_map(root);
-	ft_render_mini_map(root->mlx, root->map);
+    ft_render_map_background(root);
+    ft_render_mini_map(root->mlx, root->map);
 	ft_cast_rays(root);
-	//mlx_loop(root->mlx->mlx);
+	mlx_loop(root->mlx->mlx);
 	ft_print_info(root);
 }
