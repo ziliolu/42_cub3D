@@ -20,8 +20,9 @@ void ft_draw(t_ray *ray, t_mlx *mlx, int i)
     int draw_end;
 
     (void)ray;
+    printf("dist: %f\n", ray->per_wall_dist);
     line_height = (int)SCREEN_HEIGHT / ray->per_wall_dist;
-    draw_start = -line_height / 2 + SCREEN_HEIGHT / 2;
+    draw_start = (line_height * -1) / 2 + SCREEN_HEIGHT / 2;
     draw_end = line_height / 2 + SCREEN_HEIGHT / 2;
     if(draw_start < 0)
         draw_start = 0;
@@ -29,12 +30,14 @@ void ft_draw(t_ray *ray, t_mlx *mlx, int i)
         draw_end = SCREEN_HEIGHT - 1;
     //my_mlx_pixel_put(&mlx->map, i, draw_start, 0X0008000);
 
+    printf("start: %d\n", draw_start);
+    printf("end: %d\n", draw_end);
     while(draw_start < draw_end)
     {
-        printf("drawing");
+        //printf("drawing\n");
+        //printf("i = %d\n", i);
         my_mlx_pixel_put(&mlx->map, i, draw_start, 0X0008000);
         draw_start++;
     }
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->map.img, 0, 0);
-
 }

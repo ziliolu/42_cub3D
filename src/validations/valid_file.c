@@ -84,7 +84,7 @@ bool ft_initial_validation(char *str, t_root *root)
 		return ft_err("invalid extension", root);
 	if (!ft_is_valid_file(str, root))
 		return ft_err("invalid file", root);
-	if(!ft_is_valid_map(root->map, root->player))
+	if(!ft_is_valid_map(root))
 		return(ft_err("invalid map", root));
 	return (true);
 }

@@ -22,7 +22,7 @@ t_data ft_create_square_img(t_mlx *mlx, int color)
 	return (img);
 }
 
-bool is_player(char c)
+bool ft_is_player(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 		return (true);
@@ -45,7 +45,7 @@ void ft_render_mini_map(t_mlx *mlx, t_map *map)
 				mlx_put_image_to_window(mlx->mlx, mlx->win, map->imgs[0].img, j*SQUARE_SIZE, i*SQUARE_SIZE);
 			else if (map->map_arr[i][j] == '0')
 				mlx_put_image_to_window(mlx->mlx, mlx->win, map->imgs[1].img, j*SQUARE_SIZE, i*SQUARE_SIZE);
-			else if (is_player(map->map_arr[i][j]))
+			else if (ft_is_player(map->map_arr[i][j]))
 				mlx_put_image_to_window(mlx->mlx, mlx->win, map->imgs[2].img, j*SQUARE_SIZE, i*SQUARE_SIZE);
 			else
 				mlx_put_image_to_window(mlx->mlx, mlx->win, map->imgs[0].img, j*SQUARE_SIZE, i*SQUARE_SIZE);

@@ -107,7 +107,7 @@ bool ft_add_rgb(char *path, int colors[3]);
 bool ft_is_valid_extension(char *str, char *extension);
 bool ft_err(char *str, t_root *root);
 bool ft_is_valid_file(char *str, t_root *root);
-bool ft_is_valid_map(t_map *map, t_player *player);
+bool ft_is_valid_map(t_root *root);
 char *ft_get_trimmed_line(char *line);
 bool ft_str_is_map_type(char *str);
 bool ft_istinfo_complete(t_tinfo *tinfo);
@@ -126,4 +126,6 @@ void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map);
 void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map);
 void ft_set_ray_length(t_ray *ray);
 void ft_draw(t_ray *ray, t_mlx *mlx, int i);
+bool ft_is_player(char c);
+bool ft_init_player(int x, int y, t_player *player);
 #endif

@@ -18,22 +18,22 @@ void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map)
     if(ray->ray_dir_x < 0)
     {
         ray->step_x = -1;
-        ray->side_dist_x = (player->y - map->map_x) * ray->delta_dis_x;
+        ray->side_dist_x = (player->x - map->map_x) * ray->delta_dis_x;
     }
     else
     {
         ray->step_x = 1;
-        ray->side_dist_x = (map->map_x + 1.0 - player->y) * ray->delta_dis_x;
+        ray->side_dist_x = (map->map_x + 1.0 - player->x) * ray->delta_dis_x;
     }
     if(ray->ray_dir_y < 0)
     {
         ray->step_y = -1;
-        ray->side_dist_y = (player->x - map->map_y) * ray->delta_dis_y;
+        ray->side_dist_y = (player->y - map->map_y) * ray->delta_dis_y;
     }
     else
     {
         ray->step_y = 1;
-        ray->side_dist_y = (map->map_y + 1.0 - player->x) * ray->delta_dis_y;
+        ray->side_dist_y = (map->map_y + 1.0 - player->y) * ray->delta_dis_y;
     }
 }
 
@@ -43,7 +43,7 @@ void ft_print_dda_info(t_root *root, t_ray *ray)
     printf("--- start ---\n");
     printf("side_dist_x: %f\n", ray->side_dist_x);
     printf("side_dist_y: %f\n", ray->side_dist_y);
-    printf("delta_dist_y: %f\n", ray->delta_dis_y);
+    printf("delta_dist_x: %f\n", ray->delta_dis_x);
     printf("delta_dist_y: %f\n", ray->delta_dis_y);
     printf("--- end ---\n");
 
@@ -53,24 +53,29 @@ void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map)
     char side;
     while(root->hit_wall == 0)
     {
-        ft_print_dda_info(root, ray);
         if(ray->side_dist_x < ray->side_dist_y)
         {
-            ray->side_dist_x += ray->delta_dis_y;
+            ray->side_dist_x += ray->delta_dis_x;
             map->map_x += ray->step_x;
-            side = 'x';
+            side = 0;
         }
         else
         {
             ray->side_dist_y += ray->delta_dis_y;
+            printf("y step: %d y map: %d\n", ray->step_y, map->map_y);
             map->map_y += ray->step_y;
-            side = 'y';
+            printf("y step: %d y map: %d\n", ray->step_y, map->map_y);
+            side = 1;
         }
-        if(map->map_x < map->n_col && map->map_y < map->n_lines && map->map_arr[map->map_x][map->map_y] == '1')
+        if(map->map_arr[map->map_x][map->map_y] == '1')
+        {
             root->hit_wall = 1;
+            printf("bateu na parede!\n");
+        }
     }
-    if(side == 'x')
-        ray->per_wall_dist = (ray->side_dist_x - ray->delta_dis_x);
+    ft_print_dda_info(root, ray);
+    if(side == 0)
+        ray->per_wall_dist = ray->side_dist_x - ray->delta_dis_x;
     else
-        ray->per_wall_dist = (ray->side_dist_y - ray->delta_dis_y);
+        ray->per_wall_dist = ray->side_dist_y - ray->delta_dis_y;
 }

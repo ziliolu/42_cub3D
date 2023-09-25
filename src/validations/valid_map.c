@@ -57,7 +57,7 @@ bool ft_check_all_sides(t_map *map, int y, int x)
 	return (true);
 }
 
-bool ft_is_closed_map(t_map *map)
+bool ft_is_closed_map(t_map *map, t_player *player)
 {
 	int i;
 	int j;
@@ -68,10 +68,11 @@ bool ft_is_closed_map(t_map *map)
 		j = 0;
 		while(map->map_arr[i][j])
 		{
-			if(map->map_arr[i][j] == '0' || map->map_arr[i][j] == 'N' || map->map_arr[i][j] == 'S' \
-			|| map->map_arr[i][j] == 'E' || map->map_arr[i][j] == 'W')
-				if (!ft_check_all_sides(map, i, j))
-					return (false);
+			if(ft_is_player(map->map_arr[i][j]))
+            {
+                if (!ft_check_all_sides(map, i, j) || !ft_init_player(j, i, player))
+                    return (false);
+            }
 			j++;
 		}
 		i++;
@@ -111,46 +112,54 @@ void ft_create_map_arr(t_map *map)
 	free(line);
 }
 
-
-bool ft_init_player(char c, t_map *map, t_player *player)
+bool ft_init_player(int x, int y, t_player *player)
 {
 	static int n_player;
 
-	(void)c;
 	if (++n_player > 1)
 		return (false);
-	player->x = map->n_col;
-	player->y = map->n_lines;
+	player->x = x;
+	player->y = y;
 	return (true);
 }
 
-bool ft_is_valid_map(t_map *map, t_player *player)
+bool ft_read_map_file(t_map *map)
 {
-	int map_file;
-	char *line;
-	int i;
+    int map_file;
+    char *line;
+    int i;
 
-	map_file = open(MAP, O_RDONLY);
-	if(!map_file)
-		return (false);
-	line = NULL;
-	while((line = get_next_line(map_file)))
-	{
-		i = 0;
-		while(line[i] && line[i] != '\n')
-		{
-			if(is_player(line[i]) && !ft_init_player(line[i], map, player))
-				return (false);
-			i++;
-		}
-		if(i > map->n_col)
-			map->n_col = i;
-		map->n_lines++;
-	}
-	close(map_file);
-	ft_create_map_arr(map);
-	return (ft_is_closed_map(map));
+    map_file = open(MAP, O_RDONLY);
+    if(!map_file)
+        return (false);
+    line = NULL;
+    while((line = get_next_line(map_file)))
+    {
+        i = 0;
+        while(line[i] && line[i] != '\n')
+        {
+            i++;
+        }
+        if(i > map->n_col)
+            map->n_col = i;
+        map->n_lines++;
+    }
+    close(map_file);
+    ft_create_map_arr(map);
+    return (true);
 }
+
+bool ft_is_valid_map(t_root *root)
+{
+	if(!ft_read_map_file(root->map))
+        return (false);
+    if(!ft_is_closed_map(root->map, root->player))
+	    return (false);
+
+    return (true);
+}
+
+
 
 bool ft_add_map_file(char *line)
 {
