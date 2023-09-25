@@ -62,20 +62,24 @@ void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map)
         else
         {
             ray->side_dist_y += ray->delta_dis_y;
-            printf("y step: %d y map: %d\n", ray->step_y, map->map_y);
+            //printf("y step: %d y map: %d\n", ray->step_y, map->map_y);
             map->map_y += ray->step_y;
-            printf("y step: %d y map: %d\n", ray->step_y, map->map_y);
             side = 1;
         }
         if(map->map_arr[map->map_x][map->map_y] == '1')
         {
             root->hit_wall = 1;
-            printf("bateu na parede!\n");
+            printf("wall detected: [%d,%d]\n", map->map_x, map->map_y);
         }
     }
     ft_print_dda_info(root, ray);
     if(side == 0)
+    {
+        printf("side x = 0\n");
         ray->per_wall_dist = ray->side_dist_x - ray->delta_dis_x;
-    else
+    }
+    else{
         ray->per_wall_dist = ray->side_dist_y - ray->delta_dis_y;
+        printf("side == 1\n");
+    }
 }

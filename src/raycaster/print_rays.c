@@ -29,13 +29,8 @@ void ft_draw(t_ray *ray, t_mlx *mlx, int i)
     if(draw_end >= SCREEN_HEIGHT)
         draw_end = SCREEN_HEIGHT - 1;
     //my_mlx_pixel_put(&mlx->map, i, draw_start, 0X0008000);
-
-    printf("start: %d\n", draw_start);
-    printf("end: %d\n", draw_end);
-    while(draw_start < draw_end)
+    while(draw_start <= draw_end)
     {
-        //printf("drawing\n");
-        //printf("i = %d\n", i);
         my_mlx_pixel_put(&mlx->map, i, draw_start, 0X0008000);
         draw_start++;
     }
