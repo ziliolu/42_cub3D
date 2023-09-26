@@ -126,6 +126,6 @@ void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map);
 void ft_set_ray_length(t_ray *ray);
 void ft_draw(t_ray *ray, t_mlx *mlx, int i);
 bool ft_is_player(char c);
-bool ft_init_player(int x, int y, t_player *player);
+bool ft_init_player(char c, int x, int y, t_player *player);
 void ft_init_rays(t_root *root, t_player *player, int i, int flag);
 #endif

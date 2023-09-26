@@ -5,10 +5,6 @@ void ft_init_rays(t_root *root, t_player *player, int i, int flag)
 	double res_x;
 	double res_y;
 
-	player->plane_x = 0.66;
-	player->plane_y = 0;
-	player->dir_x = 0;
-	player->dir_y = -1;
 	root->map->map_x = (int)player->x;
 	root->map->map_y = (int)player->y;
 	root->camera_x = 2 * i / (float)SCREEN_WIDTH - 1;

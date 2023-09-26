@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/26 16:47:14 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:48:37 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,38 @@ void ft_create_map_arr(t_map *map)
 	free(line);
 }
 
-bool ft_init_player(int x, int y, t_player *player)
+void ft_init_player_direction(char c, t_player *player)
 {
-	static int n_player;
-
-	if (++n_player > 1)
-		return (false);
-	player->x = x;
-	player->y = y;
-	return (true);
+    if(c == 'N' || c == 'S')
+    {
+        player->plane_x = 0.66;
+        player->plane_y = 0;
+        player->dir_x = 0;
+        if(c == 'N')
+            player->dir_y = -1;
+        else
+            player->dir_y = 1;
+    }
+    else
+    {
+        player->plane_x = 0;
+        player->plane_y = 0.66;
+        player->dir_y = 0;
+        if(c == 'W')
+            player->dir_x = -1;
+        else
+            player->dir_x = 1;
+    }
+}
+bool ft_init_player(char c, int x, int y, t_player *player)
+{
+    static int n_player;
+    if (++n_player > 1)
+        return (false);
+    player->x = x;
+    player->y = y;
+    ft_init_player_direction(c, player);
+    return (true);
 }
 
 bool ft_read_map_file(t_map *map)
