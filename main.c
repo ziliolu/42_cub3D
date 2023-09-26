@@ -42,7 +42,6 @@ int main(int argc, char **argv)
     ft_render_map_background(root);
 	ft_cast_rays(root);
     ft_render_mini_map(root->mlx, root->map);
-
 	mlx_loop(root->mlx->mlx);
 	ft_print_info(root);
 }

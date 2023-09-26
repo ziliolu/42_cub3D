@@ -21,6 +21,5 @@ void ft_render_map_background(t_root *root)
             my_mlx_pixel_put(&map, j, i, color);
     }
     root->mlx->map = map;
-    printf("casting\n");
     mlx_put_image_to_window(root->mlx->mlx, root->mlx->win, root->mlx->map.img, 0, 0);
 }

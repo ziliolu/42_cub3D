@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_identifiers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:10 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/23 12:25:02 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:06:16 by riolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,43 +47,30 @@ bool ft_add_paths(char *id, char *path, t_root *root)
 	int w;
 	int h;
 	if(!ft_strcmp(id, "F"))
-	{
-		printf("teste F\n");
 		return (ft_add_rgb(path, root->tinfo->floor));
-	}
 	else if(!ft_strcmp(id, "C"))
-	{
-		printf("teste c\n");
 		return (ft_add_rgb(path, root->tinfo->ceil));
-	}
 	if(open(path, O_RDONLY) == -1 || !ft_is_valid_extension(path, ".xpm"))
-	{
-		printf("teste 3\n");
 		return (false); 
-	}
 	else if(!ft_strcmp(id, "NO") && !root->tinfo->north)
 	{
 		root->tinfo->north = mlx_xpm_file_to_image(root->mlx->mlx, \
 		path, &w, &h);
-		printf("teste norte\n");
 	}
 	else if(!ft_strcmp(id, "SO") && !root->tinfo->south)
 	{
 		root->tinfo->south = mlx_xpm_file_to_image(root->mlx->mlx, \
 	path, &w, &h);
-		printf("teste sul\n");
 	}
 	else if(!ft_strcmp(id, "WE") && !root->tinfo->west)
 	{
 		root->tinfo->west = mlx_xpm_file_to_image(root->mlx->mlx, \
 	path, &w, &h);
-		printf("teste we\n");
 	}
 	else if(!ft_strcmp(id, "EA") && !root->tinfo->east)
 	{
 		root->tinfo->east = mlx_xpm_file_to_image(root->mlx->mlx, \
 	path, &w, &h);
-		printf("teste east\n");
 	}
 	return (true);
 }
@@ -94,7 +81,6 @@ bool ft_valid_identifier(char *id, char *path, t_root *root)
 		|| !ft_strcmp(id, "EA") || !ft_strcmp(id, "F") || !ft_strcmp(id, "C"))
 	{
 		return (ft_add_paths(id, path, root));
-		//printf("%s\n", path);
 	}
 	return (false);
 }

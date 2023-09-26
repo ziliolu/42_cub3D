@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/22 17:09:45 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/09/26 16:47:14 by riolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool ft_is_closed_map(t_map *map, t_player *player)
 		{
 			if(ft_is_player(map->map_arr[i][j]))
             {
-                if (!ft_check_all_sides(map, i, j) || !ft_init_player(j, i, player))
+                if (!ft_check_all_sides(map, i, j) || !ft_init_player(map->map_arr[i][j], j, i, player))
                     return (false);
             }
 			j++;
