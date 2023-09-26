@@ -12,17 +12,19 @@
 # include "../mlx/mlx.h"
 # include <math.h>
 
-# define FOV 180
+# define FOV 0.66
 # define FLOOR_COLOR 0x00808080
 # define CEILING_COLOR 0x005A5A5A
+# define W_COLOR 0x00FF00A9
+# define E_COLOR 0x000074D9
+# define N_COLOR 0x00D2FF4B
+# define S_COLOR 0x00FF5733
 # define MAX 1e30
 # define PI 3.14159265359
 # define MAP "map_file"
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
 # define SQUARE_SIZE 16
-
-
 
 typedef struct s_tinfo
 {
@@ -64,6 +66,7 @@ typedef struct s_ray
 	int step_x; //what direction to step in x or y-direction (either +1 or -1)
 	int step_y;//what direction to step in x or y-direction (either +1 or -1)
 	double per_wall_dist;
+	int color_dir;
 	
 }				t_ray;
 

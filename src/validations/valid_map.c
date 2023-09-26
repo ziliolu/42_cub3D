@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/26 18:41:29 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:49:20 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ bool ft_str_is_map_type(char *str)
 	i = 0;
 	while(str[i])
 	{
-		if(str[i] != '1' && str[i] != '0' && str[i] != ' ' \
-		&& str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != '\n' && str[i] != '\t')
+		if(str[i] != '1' && str[i] != '0' && str[i] != ' ' && !ft_is_player(str[i]) \
+		&& str[i] != '\n' && str[i] != '\t')
 			return (false);
 		i++;
 	}
@@ -116,7 +116,7 @@ void ft_init_player_direction(char c, t_player *player)
 {
     if(c == 'N' || c == 'S')
     {
-        player->plane_x = 0.66;
+        player->plane_x = FOV;
         player->plane_y = 0;
         player->dir_x = 0;
         if(c == 'N')
@@ -127,7 +127,7 @@ void ft_init_player_direction(char c, t_player *player)
     else
     {
         player->plane_x = 0;
-        player->plane_y = 0.66;
+        player->plane_y = FOV;
         player->dir_y = 0;
         if(c == 'W')
             player->dir_x = -1;

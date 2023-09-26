@@ -29,7 +29,7 @@ void ft_draw(t_ray *ray, t_mlx *mlx, int i)
         draw_end = SCREEN_HEIGHT - 1;
     while(draw_start <= draw_end)
     {
-        my_mlx_pixel_put(&mlx->map, i, draw_start, 0X0008000);
+        my_mlx_pixel_put(&mlx->map, i, draw_start, ray->color_dir);
         draw_start++;
     }
 }
