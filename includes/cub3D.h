@@ -71,11 +71,16 @@ typedef struct s_ray
 	double side_dist_y;
 	double delta_dis_x;
 	double delta_dis_y;
-	int step_x; //what direction to step in x or y-direction (either +1 or -1)
-	int step_y;//what direction to step in x or y-direction (either +1 or -1)
+	int step_x;
+	int step_y;
 	double per_wall_dist;
 	int color;
 	int side;
+    int line_height;
+    int draw_start;
+    int draw_end;
+    double tex_step;
+    double tex_pos;
 	t_data xpm_img;
 	
 }				t_ray;
@@ -137,7 +142,7 @@ void ft_cast_rays(t_root *root);
 void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map);
 void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map);
 void ft_set_ray_length(t_ray *ray);
-void ft_draw(t_ray *ray, t_map *map, t_root *root, int i);
+void ft_draw(t_ray *ray, t_root *root, int i);
 bool ft_is_player(char c);
 bool ft_init_player(char c, int x, int y, t_player *player);
 void ft_init_rays(t_root *root, t_player *player, int i);
