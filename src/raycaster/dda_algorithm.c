@@ -48,39 +48,71 @@ void ft_print_dda_info(t_root *root, t_ray *ray)
     printf("--- end ---\n");
 
 }
+void ft_set_hitted_side(t_root *root, t_map *map, t_ray *ray, int side )
+{
+     if(side == 0)
+    {
+        ray->per_wall_dist = ray->side_dist_x - ray->delta_dis_x;
+        if(map->map_x - root->player->x < 0)
+        {
+            //ray->color_dir = W_COLOR;
+            //printf("wall: [%d, %d]: eoste\n", map->map_y, map->map_x);
+        }
+        else
+        {
+            //ray->color_dir = E_COLOR;
+            //printf("wall: [%d, %d]: leste\n", map->map_y, map->map_x);
+        }
+    }
+    else
+    {
+        ray->per_wall_dist = ray->side_dist_y - ray->delta_dis_y;
+        if(map->map_y - root->player->y < 0)
+        {
+            //ray->color_dir = N_COLOR;
+            //printf("wall: [%d, %d]: norte\n", map->map_y, map->map_x);
+        }
+        else
+        {
+            //ray->color_dir = S_COLOR;
+            //printf("wall: [%d, %d]: sul\n", map->map_y, map->map_x);
+        }
+            
+    }
+}
+
 void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map)
 {
-    char side;
     while(root->hit_wall == 0)
     {
         if(ray->side_dist_x < ray->side_dist_y)
         {
             ray->side_dist_x += ray->delta_dis_x;
             map->map_x += ray->step_x;
-            side = 0;
+            ray->side = 0;
         }
         else
         {
             ray->side_dist_y += ray->delta_dis_y;
             map->map_y += ray->step_y;
-            side = 1;
+            ray->side = 1;
         }
-
         if(map->map_arr[map->map_y][map->map_x] == '1')
             root->hit_wall = 1;
     }
     /* ft_print_dda_info(root, ray); */
-    if(side == 0)
+    if(ray->side == 0)
     {
         if(map->map_x - root->player->x < 0)
         {
-            ray->color_dir = W_COLOR;
-            printf("wall: [%d, %d]: eoste\n", map->map_y, map->map_x);
+            ray->xpm_img = root->tinfo->west;
+           // printf("wall: [%d, %d]: eoste\n", map->map_y, map->map_x);
         }
         else
         {
-            ray->color_dir = E_COLOR;
-            printf("wall: [%d, %d]: leste\n", map->map_y, map->map_x);
+            //ray->color_dir = E_COLOR;
+            ray->xpm_img = root->tinfo->east;
+            //printf("wall: [%d, %d]: leste\n", map->map_y, map->map_x);
         }
         ray->per_wall_dist = ray->side_dist_x - ray->delta_dis_x;
     }
@@ -88,13 +120,16 @@ void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map)
     {
         if(map->map_y - root->player->y < 0)
         {
-            ray->color_dir = N_COLOR;
-            printf("wall: [%d, %d]: norte\n", map->map_y, map->map_x);
+            //ray->color_dir = N_COLOR;
+            ray->xpm_img = root->tinfo->north;
+
+            //printf("wall: [%d, %d]: norte\n", map->map_y, map->map_x);
         }
         else
         {
-            ray->color_dir = S_COLOR;
-            printf("wall: [%d, %d]: sul\n", map->map_y, map->map_x);
+            //ray->color_dir = S_COLOR;
+            ray->xpm_img = root->tinfo->south;
+            //printf("wall: [%d, %d]: sul\n", map->map_y, map->map_x);
         }
             
         ray->per_wall_dist = ray->side_dist_y - ray->delta_dis_y;

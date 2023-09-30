@@ -11,6 +11,8 @@
 # include "../lib/get_next_line/get_next_line.h"
 # include "../mlx/mlx.h"
 # include <math.h>
+# include <stdlib.h> 
+# include <stdint.h>
 
 # define FOV 0.66
 # define FLOOR_COLOR 0x00808080
@@ -24,17 +26,10 @@
 # define MAP "map_file"
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 # define SQUARE_SIZE 16
 
-typedef struct s_tinfo
-{
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
-	int		floor[3];
-	int		ceil[3];
-}				t_tinfo;
 
 typedef struct s_data 
 {
@@ -44,6 +39,19 @@ typedef struct s_data
 	int line_length;
 	int endian;
 }				t_data;
+
+typedef struct s_tinfo
+{
+	t_data north;
+	t_data south;
+	t_data west;
+	t_data east;
+	int		floor[3];
+	int		ceil[3];
+	double wallX;
+	int texX;
+	int texY;
+}				t_tinfo;
 
 typedef struct s_player
 {
@@ -66,7 +74,9 @@ typedef struct s_ray
 	int step_x; //what direction to step in x or y-direction (either +1 or -1)
 	int step_y;//what direction to step in x or y-direction (either +1 or -1)
 	double per_wall_dist;
-	int color_dir;
+	int color;
+	int side;
+	t_data xpm_img;
 	
 }				t_ray;
 
@@ -127,7 +137,7 @@ void ft_cast_rays(t_root *root);
 void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map);
 void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map);
 void ft_set_ray_length(t_ray *ray);
-void ft_draw(t_ray *ray, t_mlx *mlx, int i);
+void ft_draw(t_ray *ray, t_map *map, t_root *root, int i);
 bool ft_is_player(char c);
 bool ft_init_player(char c, int x, int y, t_player *player);
 void ft_init_rays(t_root *root, t_player *player, int i);

@@ -21,7 +21,7 @@ void ft_cast_rays(t_root *root)
 		ft_set_ray_length(root->ray);
 		ft_set_step_and_side_dist(root->ray, root->player, root->map);
 		ft_dda_algorithm(root, root->ray, root->map);
-		ft_draw(root->ray, root->mlx, i);
+		ft_draw(root->ray, root->map, root, i);
 		i++;
 	}
 	mlx_put_image_to_window(root->mlx->mlx, root->mlx->win, root->mlx->map.img, 0, 0);

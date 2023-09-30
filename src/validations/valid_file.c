@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:00 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/23 12:25:19 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/09/30 10:02:49 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool ft_is_valid_extension(char *str, char *extension)
 bool ft_istinfo_complete(t_tinfo *tinfo)
 {
 	//falta verificar floor e ceiling
-	if(!tinfo->north || !tinfo->south || !tinfo->west || !tinfo->east) 
+	if(!tinfo->north.addr || !tinfo->south.addr || !tinfo->west.addr || !tinfo->east.addr) 
 		return (false);
 	return (true);
 }

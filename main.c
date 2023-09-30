@@ -14,11 +14,6 @@ void	ft_init_structs(t_root *root)
 	player = malloc(sizeof(t_player));
 	ray = malloc(sizeof(t_ray));
 
-	tinfo->north = NULL;
-	tinfo->south = NULL;
-	tinfo->east = NULL;
-	tinfo->west = NULL;
-
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT	, "Cub3D");
 	root->tinfo = tinfo;
