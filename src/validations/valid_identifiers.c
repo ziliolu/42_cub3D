@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   valid_identifiers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:10 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/26 16:06:16 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/09/30 10:29:25 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3D.h"
 
-bool ft_add_rgb(char *path, int colors[3])
+bool ft_add_rgb(char *path, int *arr)
 {
 	int i;
 	int j;
@@ -23,6 +23,10 @@ bool ft_add_rgb(char *path, int colors[3])
 	i = 0;
 	start = 0;
 	j = -1;
+    if(!arr)
+    {
+        arr = ft_calloc(sizeof(int), 3);
+    }
 	while (++j < 3)
 	{
 		while (path[i] != ',' && path[i+1])
@@ -31,7 +35,7 @@ bool ft_add_rgb(char *path, int colors[3])
 		res = ft_atoi(tmp);
 		if (res < 0 || res > 255)
 			return (false);
-		colors[j] = res;
+		arr[j] = res;
 		free(tmp);
 		if (path[i+1])
 			i++;
@@ -42,35 +46,43 @@ bool ft_add_rgb(char *path, int colors[3])
 	return (true);
 }
 
-bool ft_add_paths(char *id, char *path, t_root *root)
+bool ft_add_paths(char *id, char *path, t_tinfo *tinfo, t_mlx *mlx)
 {
 	int w;
 	int h;
 	if(!ft_strcmp(id, "F"))
-		return (ft_add_rgb(path, root->tinfo->floor));
+		return (ft_add_rgb(path, tinfo->floor));
 	else if(!ft_strcmp(id, "C"))
-		return (ft_add_rgb(path, root->tinfo->ceil));
+		return (ft_add_rgb(path, tinfo->ceil));
 	if(open(path, O_RDONLY) == -1 || !ft_is_valid_extension(path, ".xpm"))
 		return (false); 
-	else if(!ft_strcmp(id, "NO") && !root->tinfo->north)
+	else if(!ft_strcmp(id, "NO") && !tinfo->north.img)
 	{
-		root->tinfo->north = mlx_xpm_file_to_image(root->mlx->mlx, \
-		path, &w, &h);
-	}
-	else if(!ft_strcmp(id, "SO") && !root->tinfo->south)
-	{
-		root->tinfo->south = mlx_xpm_file_to_image(root->mlx->mlx, \
+		tinfo->north.img = mlx_xpm_file_to_image(mlx->mlx, \
 	path, &w, &h);
+		tinfo->north.addr = mlx_get_data_addr(tinfo->north.img, \
+		&tinfo->north.bits_per_pixel, &tinfo->north.line_length, &tinfo->north.endian);
 	}
-	else if(!ft_strcmp(id, "WE") && !root->tinfo->west)
+	else if(!ft_strcmp(id, "SO") && !tinfo->south.img)
 	{
-		root->tinfo->west = mlx_xpm_file_to_image(root->mlx->mlx, \
+		tinfo->south.img = mlx_xpm_file_to_image(mlx->mlx, \
 	path, &w, &h);
+		tinfo->south.addr = mlx_get_data_addr(tinfo->south.img, \
+		&tinfo->south.bits_per_pixel, &tinfo->south.line_length, &tinfo->south.endian);
 	}
-	else if(!ft_strcmp(id, "EA") && !root->tinfo->east)
+	else if(!ft_strcmp(id, "WE") && !tinfo->west.img)
 	{
-		root->tinfo->east = mlx_xpm_file_to_image(root->mlx->mlx, \
+		tinfo->west.img = mlx_xpm_file_to_image(mlx->mlx, \
 	path, &w, &h);
+		tinfo->west.addr = mlx_get_data_addr(tinfo->west.img, \
+		&tinfo->west.bits_per_pixel, &tinfo->west.line_length, &tinfo->west.endian);
+	}
+	else if(!ft_strcmp(id, "EA") && !tinfo->east.img)
+	{
+		tinfo->east.img = mlx_xpm_file_to_image(mlx->mlx, \
+	path, &w, &h);
+		tinfo->east.addr = mlx_get_data_addr(tinfo->east.img, \
+		&tinfo->east.bits_per_pixel, &tinfo->east.line_length, &tinfo->east.endian);
 	}
 	return (true);
 }
@@ -80,7 +92,7 @@ bool ft_valid_identifier(char *id, char *path, t_root *root)
 	if(!ft_strcmp(id, "NO") || !ft_strcmp(id, "SO") || !ft_strcmp(id, "WE") \
 		|| !ft_strcmp(id, "EA") || !ft_strcmp(id, "F") || !ft_strcmp(id, "C"))
 	{
-		return (ft_add_paths(id, path, root));
+		return (ft_add_paths(id, path, root->tinfo, root->mlx));
 	}
 	return (false);
 }

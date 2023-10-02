@@ -75,8 +75,8 @@ void ft_cast_rays(t_root *root)
 		ft_init_ray(root, root->player, i);
 		ft_set_ray_length(root->rays);
 		ft_set_step_and_side_dist(root->rays, root->player, root->map);
-		ft_dda_algorithm(root->rays, root->map);
-		ft_draw(root->rays, root->mlx, i);
+		ft_dda_algorithm(root, root->rays, root->map);
+		ft_draw(root->rays, root, i);
 		root->rays = root->rays->next;
 	}
 	mlx_put_image_to_window(root->mlx->mlx, root->mlx->win, root->mlx->map.img, 0, 0);

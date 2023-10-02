@@ -10,7 +10,10 @@ double ft_degrees_to_radians(double degrees)
 
 bool ft_err(char *str, t_root *root)
 {
-	printf("Error: %s\n", str);
+	if(root->error_msg)
+		printf("Error: %s: %s\n", str, root->error_msg);
+	else 
+		printf("Error: %s\n", str);
 	ft_panic(root);
 	return (false);
 }

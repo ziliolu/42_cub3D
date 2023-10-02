@@ -11,16 +11,24 @@
 # include "../lib/get_next_line/get_next_line.h"
 # include "../mlx/mlx.h"
 # include <math.h>
+# include <stdlib.h> 
+# include <stdint.h>
 
 # define FOV 0.66
 # define SPEED 0.1
 # define FLOOR_COLOR 0x00808080
 # define CEILING_COLOR 0x005A5A5A
+# define W_COLOR 0x00FF00A9
+# define E_COLOR 0x000074D9
+# define N_COLOR 0x00D2FF4B
+# define S_COLOR 0x00FF5733
 # define MAX 1e30
 # define PI 3.14159265359
 # define MAP "map_file"
 # define SCREEN_WIDTH 1920
 # define SCREEN_HEIGHT 1080
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 # define SQUARE_SIZE 16
 
 # define ESC 65307
@@ -31,15 +39,12 @@
 # define LEFT 65361
 # define RIGHT 65363
 
-typedef struct s_tinfo
+typedef struct s_errors
 {
-	void	*north;
-	void	*south;
-	void	*west;
-	void	*east;
-	int		floor[3];
-	int		ceil[3];
-}				t_tinfo;
+	char *tinfo_is_not_complete;
+	char *not_valid_texture_or_color;
+}				t_errors;
+
 
 typedef struct s_data 
 {
@@ -49,6 +54,19 @@ typedef struct s_data
 	int line_length;
 	int endian;
 }				t_data;
+
+typedef struct s_tinfo
+{
+	t_data north;
+	t_data south;
+	t_data west;
+	t_data east;
+	int		*floor;
+	int		*ceil;
+	double wallX;
+	int texX;
+	int texY;
+}				t_tinfo;
 
 typedef struct s_player
 {
@@ -72,7 +90,16 @@ typedef struct s_ray
 	int step_x;
 	int step_y;
 	double per_wall_dist;
+	int color;
+	int side;
+    int line_height;
+    int draw_start;
+    int draw_end;
+    double tex_step;
+    double tex_pos;
+	t_data xpm_img;
 	struct s_ray *next;
+	
 }				t_ray;
 
 typedef struct s_map
@@ -99,11 +126,14 @@ typedef struct s_root
 {
 	double		wall_num;
 	double		camera_x;
+    int         hit_wall;
+	char 		*error_msg;
 	t_tinfo 	*tinfo;
     t_ray		*rays;
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
+	t_errors	*errors;
 }				t_root;
 
 
@@ -111,7 +141,7 @@ void ft_print_textures(t_tinfo *tinfo);
 int ft_panic(t_root *root);
 void ft_print_arr(char **arr);
 void ft_print_info(t_root *root);
-bool ft_add_rgb(char *path, int colors[3]);
+bool ft_add_rgb(char *path, int *arr);
 bool ft_is_valid_extension(char *str, char *extension);
 bool ft_err(char *str, t_root *root);
 bool ft_is_valid_file(char *str, t_root *root);
@@ -128,10 +158,10 @@ t_data ft_create_square_img(t_mlx *mlx, int color, int size);
 void ft_create_map_images(t_mlx *mlx, t_map *map);
 void ft_render_map(t_root *root);
 void ft_cast_rays(t_root *root);
-void ft_dda_algorithm(t_ray *ray, t_map *map);
+void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map);
 void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map);
 void ft_set_ray_length(t_ray *ray);
-void ft_draw(t_ray *ray, t_mlx *mlx, int i);
+void ft_draw(t_ray *ray, t_root *root, int i);
 bool ft_is_player(char c);
 bool ft_init_player(char c, int x, int y, t_player *player);
 void hooks(t_root *root);

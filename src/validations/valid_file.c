@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:00 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/23 12:25:19 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/02 12:26:26 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ bool ft_is_valid_extension(char *str, char *extension)
 		return (true);
 	return (false);
 }
+
 bool ft_istinfo_complete(t_tinfo *tinfo)
 {
-	//falta verificar floor e ceiling
-	if(!tinfo->north || !tinfo->south || !tinfo->west || !tinfo->east) 
+	if(!tinfo->north.addr || !tinfo->south.addr || !tinfo->west.addr || !tinfo->east.addr || !tinfo->ceil || !tinfo->floor)
 		return (false);
 	return (true);
 }
@@ -47,7 +47,7 @@ bool ft_is_valid_file(char *str, t_root *root)
 	if(open(MAP, O_RDWR) != -1)
 		open(MAP, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 	if(fd == -1)
-		return (false);
+        return (false);
 	line = NULL;
 	while((line = get_next_line(fd)))
 	{
@@ -58,6 +58,7 @@ bool ft_is_valid_file(char *str, t_root *root)
 			{
 				free(tmp);
 				free(line);
+				root->error_msg = root->errors->tinfo_is_not_complete;
 				return (false);
 			}
 			copy_map = 1;
@@ -67,6 +68,7 @@ bool ft_is_valid_file(char *str, t_root *root)
 		{
 			free(line);
 			free(tmp);
+			root->error_msg = root->errors->not_valid_texture_or_color;
 			return (false);
 		}
 		free(tmp);
