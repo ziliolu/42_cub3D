@@ -22,6 +22,7 @@ void ft_render_map(t_root *root)
 	}
 	root->mlx->map = map;
 	mlx_put_image_to_window(root->mlx->mlx, root->mlx->win, root->mlx->map.img, 0, 0);
-	ft_cast_rays(root);
-	ft_render_mini_map(root->mlx, root->map, root->player, root->rays);
+    ft_cast_rays(root);
+    ft_render_mini_map(root->mlx, root->map, root->player, root->rays);
+
 }

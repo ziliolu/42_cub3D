@@ -23,10 +23,6 @@ bool ft_add_rgb(char *path, int *arr)
 	i = 0;
 	start = 0;
 	j = -1;
-    if(!arr)
-    {
-        arr = ft_calloc(sizeof(int), 3);
-    }
 	while (++j < 3)
 	{
 		while (path[i] != ',' && path[i+1])

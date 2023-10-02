@@ -7,6 +7,7 @@ void ft_init_ray(t_root *root, t_player *player, int i)
 	root->camera_x = 2 * i / (double)SCREEN_WIDTH - 1;
 	root->rays->ray_dir_x  = player->dir_x + player->plane_x * root->camera_x;
 	root->rays->ray_dir_y = player->dir_y + player->plane_y * root->camera_x;
+    root->hit_wall = 0;
 }
 
 t_ray	*last_ray(t_ray *lst)
@@ -66,9 +67,9 @@ void create_rays(t_root *root)
 void ft_cast_rays(t_root *root)
 {
 	int i;
-	t_ray *head;
+	//t_ray *head;
 
-	head = root->rays;
+	//head = root->rays;
 	i = -1;
 	while(++i < SCREEN_WIDTH)
 	{
@@ -77,8 +78,9 @@ void ft_cast_rays(t_root *root)
 		ft_set_step_and_side_dist(root->rays, root->player, root->map);
 		ft_dda_algorithm(root, root->rays, root->map);
 		ft_draw(root->rays, root, i);
-		root->rays = root->rays->next;
+        mlx_put_image_to_window(root->mlx->mlx, root->mlx->win, root->mlx->map.img, 0, 0);
+		//root->rays = root->rays->next;
 	}
 	mlx_put_image_to_window(root->mlx->mlx, root->mlx->win, root->mlx->map.img, 0, 0);
-	root->rays = head;
+	//root->rays = head;
 }

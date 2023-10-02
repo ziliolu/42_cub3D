@@ -61,8 +61,8 @@ typedef struct s_tinfo
 	t_data south;
 	t_data west;
 	t_data east;
-	int		*floor;
-	int		*ceil;
+	int		floor[3];
+	int		ceil[3];
 	double wallX;
 	int texX;
 	int texY;
