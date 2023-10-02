@@ -31,6 +31,13 @@
 # define SQUARE_SIZE 16
 
 
+typedef struct s_errors
+{
+	char *tinfo_is_not_complete;
+	char *not_valid_texture_or_color;
+}				t_errors;
+
+
 typedef struct s_data 
 {
 	void *img;
@@ -46,8 +53,8 @@ typedef struct s_tinfo
 	t_data south;
 	t_data west;
 	t_data east;
-	int		floor[3];
-	int		ceil[3];
+	int		*floor;
+	int		*ceil;
 	double wallX;
 	int texX;
 	int texY;
@@ -109,11 +116,13 @@ typedef struct s_root
 	double		wall_num;
 	double		camera_x;
     int         hit_wall;
+	char 		*error_msg;
 	t_tinfo 	*tinfo;
     t_ray		*ray;
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
+	t_errors	*errors;
 }				t_root;
 
 
@@ -121,7 +130,7 @@ void ft_print_textures(t_tinfo *tinfo);
 int ft_panic(t_root *root);
 void ft_print_arr(char **arr);
 void ft_print_info(t_root *root);
-bool ft_add_rgb(char *path, int colors[3]);
+bool ft_add_rgb(char *path, int *arr);
 bool ft_is_valid_extension(char *str, char *extension);
 bool ft_err(char *str, t_root *root);
 bool ft_is_valid_file(char *str, t_root *root);

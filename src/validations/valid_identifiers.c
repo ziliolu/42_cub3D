@@ -12,7 +12,7 @@
 
 #include "../../includes/cub3D.h"
 
-bool ft_add_rgb(char *path, int colors[3])
+bool ft_add_rgb(char *path, int *arr)
 {
 	int i;
 	int j;
@@ -23,6 +23,10 @@ bool ft_add_rgb(char *path, int colors[3])
 	i = 0;
 	start = 0;
 	j = -1;
+    if(!arr)
+    {
+        arr = ft_calloc(sizeof(int), 3);
+    }
 	while (++j < 3)
 	{
 		while (path[i] != ',' && path[i+1])
@@ -31,7 +35,7 @@ bool ft_add_rgb(char *path, int colors[3])
 		res = ft_atoi(tmp);
 		if (res < 0 || res > 255)
 			return (false);
-		colors[j] = res;
+		arr[j] = res;
 		free(tmp);
 		if (path[i+1])
 			i++;
