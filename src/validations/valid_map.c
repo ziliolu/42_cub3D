@@ -6,7 +6,7 @@
 /*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/26 18:41:29 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/09/29 17:29:30 by riolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool ft_str_is_map_type(char *str)
 	while(str[i])
 	{
 		if(str[i] != '1' && str[i] != '0' && str[i] != ' ' \
-		&& str[i] != 'N' && str[i] != 'S' && str[i] != 'E' && str[i] != '\n' && str[i] != '\t')
+		&& !ft_is_player(str[i]) && str[i] != '\n' && str[i] != '\t')
 			return (false);
 		i++;
 	}
@@ -116,32 +116,45 @@ void ft_init_player_direction(char c, t_player *player)
 {
     if(c == 'N' || c == 'S')
     {
-        player->plane_x = 0.66;
+        player->plane_x = FOV;
         player->plane_y = 0;
         player->dir_x = 0;
         if(c == 'N')
+		{
             player->dir_y = -1;
+			player->angle = -PI / 2;
+		}
         else
+		{
             player->dir_y = 1;
+			player->angle = +PI / 2;
+		}
     }
     else
     {
         player->plane_x = 0;
-        player->plane_y = 0.66;
+        player->plane_y = FOV;
         player->dir_y = 0;
         if(c == 'W')
+		{
             player->dir_x = -1;
+			player->angle = -PI;
+		}
         else
+		{
             player->dir_x = 1;
+			player->angle = 0;
+		}
     }
 }
+
 bool ft_init_player(char c, int x, int y, t_player *player)
 {
     static int n_player;
     if (++n_player > 1)
         return (false);
-    player->x = (float)x + 0.5;
-    player->y = (float)y + 0.5;
+    player->x = (double)x + 0.50;
+    player->y = (double)y + 0.50;
     ft_init_player_direction(c, player);
     return (true);
 }
