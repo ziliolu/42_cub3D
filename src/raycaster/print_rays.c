@@ -6,16 +6,8 @@ void print_single_ray(t_ray *rays, t_mlx *mlx, double x, double y)
 	double	deltay;
 	int		pixels;
 
-	printf("\n\ndirX: %f  dirY: %f\n", rays->ray_dir_x, rays->ray_dir_y);
-	printf("deltaX: %f  deltaY: %f\n", rays->delta_dis_x, rays->delta_dis_y);
-	printf("sideX: %f  sideY: %f\n", rays->side_dist_x, rays->side_dist_y);
-	printf("stepX: %d  stepY: %d\n", rays->step_x, rays->step_y);
-	printf("distance: %f\n", rays->per_wall_dist);
-
-	deltax = (rays->ray_dir_x - x);
-	deltay = (rays->ray_dir_y - y);
-
-	printf("deltaX: %f  deltaY: %f\n", deltax, deltay);
+	deltax = (rays->ray_dir_x - x) / SQUARE_SIZE;
+	deltay = (rays->ray_dir_y - y) / SQUARE_SIZE;
 	pixels = sqrt((deltax * deltax) + (deltay * deltay));
 	while (pixels)
 	{
@@ -54,8 +46,7 @@ void print_rays(t_mlx *mlx, t_ray *rays, t_player *player)
 	head = rays;
 	n_rays = ((SCREEN_WIDTH / FOV) / 100) * 2;
 	x = player->x * SQUARE_SIZE;
-	y = player->y * SQUARE_SIZE;
-	printf("playerX: %f  playerY: %f\n", x, y);
+	y = (player->y - 0.25) * SQUARE_SIZE;
 	while (++i < n_rays)
 	{
 		if (!rays)
@@ -98,7 +89,7 @@ void ft_init_draw_variables(t_root *root, t_ray *ray)
 void ft_draw(t_ray *ray, t_root *root, int i)
 {
     ft_init_draw_variables(root, ray);
-    while(ray->draw_start < ray->draw_end)
+    while(ray->draw_start <= ray->draw_end)
     {
         root->tinfo->texY = (int)ray->tex_pos & (TEX_HEIGHT - 1);
         ray->tex_pos += ray->tex_step;

@@ -64,6 +64,9 @@ void player_rotation(t_player *player, int key_code, t_root *root)
 		player->angle -= calc2;
 	player->dir_x = cos(player->angle);
 	player->dir_y = sin(player->angle);
+	/* player->plane_x = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
+	player->plane_x += player->angle;
+	player->plane_y -= player->angle; */
 	ft_render_map(root);
 }
 
