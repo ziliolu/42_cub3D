@@ -68,38 +68,20 @@ void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map)
         if(map->map_arr[map->map_y][map->map_x] == '1')
             root->hit_wall = 1;
     }
-    /* ft_print_dda_info(root, ray); */
     if(ray->side == 0)
     {
         if(map->map_x - root->player->x < 0)
-        {
             ray->xpm_img = root->tinfo->west;
-           // printf("wall: [%d, %d]: eoste\n", map->map_y, map->map_x);
-        }
         else
-        {
-            //ray->color_dir = E_COLOR;
             ray->xpm_img = root->tinfo->east;
-            //printf("wall: [%d, %d]: leste\n", map->map_y, map->map_x);
-        }
         ray->per_wall_dist = ray->side_dist_x - ray->delta_dis_x;
     }
     else
     {
         if(map->map_y - root->player->y < 0)
-        {
-            //ray->color_dir = N_COLOR;
             ray->xpm_img = root->tinfo->north;
-
-            //printf("wall: [%d, %d]: norte\n", map->map_y, map->map_x);
-        }
         else
-        {
-            //ray->color_dir = S_COLOR;
             ray->xpm_img = root->tinfo->south;
-            //printf("wall: [%d, %d]: sul\n", map->map_y, map->map_x);
-        }
-            
         ray->per_wall_dist = ray->side_dist_y - ray->delta_dis_y;
     }
 }
