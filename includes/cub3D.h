@@ -14,8 +14,9 @@
 # include <stdlib.h> 
 # include <stdint.h>
 
-# define FOV 0.66
+# define FOV 0.60
 # define SPEED 0.1
+# define ROTATION 0.05
 # define FLOOR_COLOR 0x00808080
 # define CEILING_COLOR 0x005A5A5A
 # define W_COLOR 0x00FF00A9

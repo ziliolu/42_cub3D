@@ -22,51 +22,40 @@ void	player_movement(t_player *player,  int key_code, t_root *root)
 	y_value = player->dir_y * SPEED;
 	if (key_code == W)
 		check_colision(player->x + x_value, player->y + y_value, root);
-	if (key_code == A)
-	{
-		if (player->angle <= (3*PI)/4 && player->angle >= -PI/4)
-			check_colision(player->x - y_value, player->y - x_value, root);
-		else
-			check_colision(player->x + y_value, player->y + x_value, root);
-	}
 	if (key_code == S)
 		check_colision(player->x - x_value, player->y - y_value, root);
+	if (key_code == A)
+	{
+		check_colision(player->x - y_value, player->y - x_value, root);
+		/* if (y_value <= 0) */
+		/* else
+			check_colision(player->x + y_value, player->y + x_value, root); */
+	}
 	if (key_code == D)
 	{
-		if (player->angle <= (3*PI)/4 && player->angle >= -PI/4)
-			check_colision(player->x + y_value, player->y + x_value, root);
-		else
-			check_colision(player->x - y_value, player->y - x_value, root);
+		check_colision(player->x + y_value, player->y + x_value, root);
+		/* if (y_value <= 0) */
+		/* else
+			check_colision(player->x - y_value, player->y - x_value, root); */
 	}
 	ft_render_map(root);
 }
 
 void player_rotation(t_player *player, int key_code, t_root *root)
 {
-	float calc1 = PI / 64;
-	float calc2 = 2 * PI;
+	double oldDirX;
+	double oldPlaneX;
+	double rotation;
 
+	oldDirX = player->dir_x;
+	oldPlaneX = player->plane_x;
+	rotation = ROTATION;
 	if (key_code == LEFT)
-	{
-		player->angle -= calc1;
-		if (player->angle < 0)
-			player->angle += calc2;
-	}
-	else
-	{
-		player->angle += calc1;
-		if (player->angle > calc2)
-			player->angle -= calc2;
-	}
-	if (player->angle < 0)
-		player->angle += calc2;
-	else if (player->angle > calc2)
-		player->angle -= calc2;
-	player->dir_x = cos(player->angle);
-	player->dir_y = sin(player->angle);
-	/* player->plane_x = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-	player->plane_x += player->angle;
-	player->plane_y -= player->angle; */
+		rotation *= -1;
+	player->dir_x = oldDirX * cos(rotation) - player->dir_y * sin(rotation);
+	player->dir_y = oldDirX * sin(rotation) + player->dir_y * cos(rotation);
+	player->plane_x = oldPlaneX * cos(rotation) - player->plane_y * sin(rotation);
+	player->plane_y = oldPlaneX * sin(rotation) + player->plane_y * cos(rotation);
 	ft_render_map(root);
 }
 
