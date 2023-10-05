@@ -44,20 +44,14 @@ bool ft_str_is_map_type(char *str)
 
 bool ft_check_all_sides(t_map *map, int y, int x)
 {
-	if (y == 0 || y == map->n_lines - 1 || x == 0 || y == map->n_col - 1)
-	{
-		printf("pos do erro: [%d,%d] = %c\n", y,x, map->map_arr[y][x]);
+	if (y == 0 || y == map->n_lines - 1 || x == 0 || x == map->n_col - 1)
 		return (false);
-	}
 	if(map->map_arr[y - 1][x] == '-' || map->map_arr[y + 1][x] == '-' || map->map_arr[y][x - 1] == '-' || map->map_arr[y][x + 1] == '-')
-	{
-		printf("pos do erro: [%d,%d] = %c\n", y,x, map->map_arr[y][x]);
 		return (false);
-	}
 	return (true);
 }
 
-bool ft_is_closed_map(t_map *map, t_player *player)
+bool ft_check_map(t_map *map, t_player *player)
 {
 	int i;
 	int j;
@@ -68,7 +62,7 @@ bool ft_is_closed_map(t_map *map, t_player *player)
 		j = 0;
 		while(map->map_arr[i][j])
 		{
-			if(ft_is_player(map->map_arr[i][j]))
+			if(ft_is_player(map->map_arr[i][j]) || map->map_arr[i][j] == '0')
             {
                 if (!ft_check_all_sides(map, i, j) || !ft_init_player(map->map_arr[i][j], j, i, player))
                     return (false);
@@ -77,8 +71,9 @@ bool ft_is_closed_map(t_map *map, t_player *player)
 		}
 		i++;
 	}
-	return (true);
+	return (player->n_players != 0);
 }
+
 void ft_create_map_arr(t_map *map)
 {
 	int map_file;
@@ -138,12 +133,14 @@ void ft_init_player_direction(char c, t_player *player)
 
 bool ft_init_player(char c, int x, int y, t_player *player)
 {
-    static int n_player;
-    if (++n_player > 1)
-        return (false);
-    player->x = (double)x + 0.50;
-    player->y = (double)y + 0.50;
-    ft_init_player_direction(c, player);
+	if(ft_is_player(c))
+	{
+		if(++player->n_players > 1)
+			return (false);
+		player->x = (double)x + 0.50;
+		player->y = (double)y + 0.50;
+		ft_init_player_direction(c, player);
+	}
     return (true);
 }
 
@@ -177,13 +174,11 @@ bool ft_is_valid_map(t_root *root)
 {
 	if(!ft_read_map_file(root->map))
         return (false);
-    if(!ft_is_closed_map(root->map, root->player))
+    if(!ft_check_map(root->map, root->player))
 	    return (false);
 
     return (true);
 }
-
-
 
 bool ft_add_map_file(char *line)
 {
