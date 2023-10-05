@@ -28,9 +28,23 @@ bool ft_is_valid_extension(char *str, char *extension)
 	return (false);
 }
 
+bool ft_is_color_complete(t_tinfo *tinfo)
+{
+    int i;
+
+    i = 0;
+    while(i < 3)
+    {
+        if(tinfo->floor[i] == -1 || tinfo->ceil[i] == -1)
+            return (false);
+        i++;
+    }
+    return (true);
+}
+
 bool ft_istinfo_complete(t_tinfo *tinfo)
 {
-	if(!tinfo->north.addr || !tinfo->south.addr || !tinfo->west.addr || !tinfo->east.addr || tinfo->ceil[0] == -1 || tinfo->floor[0] == -1)
+	if(!tinfo->north.addr || !tinfo->south.addr || !tinfo->west.addr || !tinfo->east.addr || !ft_is_color_complete(tinfo))
 		return (false);
 	return (true);
 }
@@ -52,23 +66,23 @@ bool ft_is_valid_file(char *str, t_root *root)
 	while((line = get_next_line(fd)))
 	{
 		tmp = ft_get_trimmed_line(line);
-		if((ft_isdigit(tmp[0]) || tmp[0] == ' ') && ft_str_is_map_type(line))
+		if((tmp[0] == '\n' && copy_map == 1) || ((ft_isdigit(tmp[0]) || tmp[0] == ' ') && ft_str_is_map_type(line)))
 		{
 			if(!ft_istinfo_complete(root->tinfo))
-			{
-				free(tmp);
-				free(line);
-				root->error_msg = root->errors->tinfo_is_not_complete;
-				return (false);
-			}
+            {
+                free(tmp);
+                free(line);
+                root->error_msg = INCOMPLETE_TEX_OR_COLOR_ERR;
+                return (false);
+            }
 			copy_map = 1;
 			ft_add_map_file(line);
 		}
-		else if((copy_map == 1 || ft_strcmp(tmp, "\n")) && !ft_verify_identifiers(tmp, root))
+		else if(!ft_verify_identifiers(tmp, root) && ft_strcmp(tmp, "\n"))
 		{
 			free(line);
 			free(tmp);
-			root->error_msg = root->errors->not_valid_texture_or_color;
+			root->error_msg = INVALID_TEX_OR_COLOR_ERR;
 			return (false);
 		}
 		free(tmp);

@@ -14,19 +14,19 @@
 - [ ] test_whitespace.cub
 
 ## bad
-- [ ] color_invalid_rgb.cub
 - [x] color_missing_ceiling.cub
 - [x] color_missing_floor.cub
 - [x] empty.cub
-- [ ] file_letter_end.cub
-- [ ] map_missing.cub
-- [ ] map_too_small.cub
-- [ ] player_none.cub
+- [x] wall_hole_east.cub
+- [x] wall_hole_north.cub
+- [x] wall_hole_west.cub
+- [x] wall_none.cub
+- [x] map_missing.cub
+- [x] player_none.cub
+- [x] file_letter_end.cub
+- [x] map_too_small.cub
+- [x] color_invalid_rgb.cub
 - [ ] textures_duplicates.cub
-- [ ] wall_hole_east.cub
-- [ ] wall_hole_north.cub
-- [ ] wall_hole_west.cub
-- [ ] wall_none.cub
 
 
 
