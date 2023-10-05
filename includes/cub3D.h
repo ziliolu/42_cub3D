@@ -167,5 +167,5 @@ bool is_rotating(int key_code);
 void print_rays(t_mlx *mlx, t_ray *rays, t_player *player);
 void create_rays(t_root *root);
 bool ft_is_closed_map_and_there_is_player(t_map *map, t_player *player);
-
+bool ft_is_color_complete(int *color);
 #endif

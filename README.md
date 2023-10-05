@@ -26,7 +26,7 @@
 - [x] file_letter_end.cub
 - [x] map_too_small.cub
 - [x] color_invalid_rgb.cub
-- [ ] textures_duplicates.cub
+- [x] textures_duplicates.cub
 
 
 

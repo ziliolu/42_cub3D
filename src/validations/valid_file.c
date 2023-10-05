@@ -28,14 +28,14 @@ bool ft_is_valid_extension(char *str, char *extension)
 	return (false);
 }
 
-bool ft_is_color_complete(t_tinfo *tinfo)
+bool ft_is_color_complete(int *color)
 {
     int i;
 
     i = 0;
     while(i < 3)
     {
-        if(tinfo->floor[i] == -1 || tinfo->ceil[i] == -1)
+        if(color[i] == -1)
             return (false);
         i++;
     }
@@ -44,7 +44,8 @@ bool ft_is_color_complete(t_tinfo *tinfo)
 
 bool ft_istinfo_complete(t_tinfo *tinfo)
 {
-	if(!tinfo->north.addr || !tinfo->south.addr || !tinfo->west.addr || !tinfo->east.addr || !ft_is_color_complete(tinfo))
+	if(!tinfo->north.addr || !tinfo->south.addr || !tinfo->west.addr || !tinfo->east.addr \
+    || !ft_is_color_complete(tinfo->floor) ||  !ft_is_color_complete(tinfo->ceil))
 		return (false);
 	return (true);
 }
