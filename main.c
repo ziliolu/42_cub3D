@@ -14,14 +14,13 @@ void	ft_init_structs(t_root *root)
 	player = malloc(sizeof(t_player));
 	errors = malloc(sizeof(t_errors));
 	create_rays(root);
-
 	mlx->mlx = mlx_init();
 	mlx->win = mlx_new_window(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT	, "Cub3D");
 	root->tinfo = tinfo;
 	root->map = map;
 	root->mlx = mlx;
 	root->player = player;
-	root->errors = errors; 
+	root->errors = errors;
 	root->error_msg = NULL;
     root->tinfo->ceil[0] = -1;
     root->tinfo->floor[0] = -1;
@@ -45,7 +44,8 @@ int main(int argc, char **argv)
 		return (ft_panic(root));
 	if(!ft_initial_validation(argv[1], root))
 		return (1);
-    ft_render_map(root);
+	ft_create_minimap_images(root->mlx, root->map);
+	ft_create_map_image(root->mlx);
+	ft_render_map(root);
 	hooks(root);
-    /* ft_print_info(root); */
 }

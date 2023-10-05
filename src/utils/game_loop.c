@@ -4,17 +4,23 @@ void check_colision(double x_value, double y_value, t_root *root)
 {
 	int x;
 	int y;
+	/* int marginx;
+	int marginy;
 
+	marginx = (int)x_value;
+	marginy = (int)y_value; */
 	x = (int)x_value;
 	y = (int)y_value;
 	if (root->map->map_arr[y][x] == '1')
 		return ;
 	root->player->x = x_value;
 	root->player->y = y_value;
+	ft_render_map(root);
 }
 
 void	player_movement(t_player *player,  int key_code, t_root *root)
 {
+	/* if (player->angle >) */
 	double x_value;
 	double y_value;
 
@@ -38,7 +44,6 @@ void	player_movement(t_player *player,  int key_code, t_root *root)
 		/* else
 			check_colision(player->x - y_value, player->y - x_value, root); */
 	}
-	ft_render_map(root);
 }
 
 void player_rotation(t_player *player, int key_code, t_root *root)
@@ -46,6 +51,7 @@ void player_rotation(t_player *player, int key_code, t_root *root)
 	double oldDirX;
 	double oldPlaneX;
 	double rotation;
+	double operation;
 
 	oldDirX = player->dir_x;
 	oldPlaneX = player->plane_x;
@@ -56,13 +62,16 @@ void player_rotation(t_player *player, int key_code, t_root *root)
 	player->dir_y = oldDirX * sin(rotation) + player->dir_y * cos(rotation);
 	player->plane_x = oldPlaneX * cos(rotation) - player->plane_y * sin(rotation);
 	player->plane_y = oldPlaneX * sin(rotation) + player->plane_y * cos(rotation);
+	operation = sqrt((player->dir_x * player->dir_x) + (player->dir_y * player->dir_y));
+	player->angle = acos(player->dir_x / operation) * (180 / PI);
+	/* printf("ANGLE: %f\n", player->angle); */
 	ft_render_map(root);
 }
 
 int	on_key_press(int key_code, t_root *root)
 {
 	if (key_code == ESC)
-		exit(0);
+		close_program(root);
 	if (is_moving(key_code))
 		player_movement(root->player, key_code, root);
 	if (is_rotating(key_code))
@@ -70,11 +79,6 @@ int	on_key_press(int key_code, t_root *root)
 	return (0);
 }
 
-int	close_program(void)
-{
-	//add free of the structs
-	exit(0);
-}
 
 void	hooks(t_root *root)
 {

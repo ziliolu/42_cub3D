@@ -24,7 +24,6 @@ void ft_render_mini_map(t_mlx *mlx, t_map *map, t_player *player, t_ray *rays)
 	int j;
 
 	i = -1;
-	ft_create_map_images(mlx, map);
 	while(++i < map->n_lines)
 	{
 		j = -1;
@@ -40,7 +39,7 @@ void ft_render_mini_map(t_mlx *mlx, t_map *map, t_player *player, t_ray *rays)
 	print_rays(mlx, rays, player);
 }
 
-void ft_create_map_images(t_mlx *mlx, t_map *map)
+void ft_create_minimap_images(t_mlx *mlx, t_map *map)
 {
 	map->imgs[0] = ft_create_square_img(mlx, 0x00FF0000, SQUARE_SIZE);
 	map->imgs[1] = ft_create_square_img(mlx, 0x00FFFFFF, SQUARE_SIZE);

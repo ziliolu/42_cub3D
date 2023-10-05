@@ -6,8 +6,8 @@ void print_single_ray(t_ray *rays, t_mlx *mlx, double x, double y)
 	double	deltay;
 	int		pixels;
 
-	deltax = (rays->ray_dir_x - x) / SQUARE_SIZE;
-	deltay = (rays->ray_dir_y - y) / SQUARE_SIZE;
+	deltax = (rays->ray_dir_x - x) / 2;
+	deltay = (rays->ray_dir_y - y) / 2;
 	pixels = sqrt((deltax * deltax) + (deltay * deltay));
 	while (pixels)
 	{
