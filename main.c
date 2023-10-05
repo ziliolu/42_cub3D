@@ -1,18 +1,5 @@
 #include "./includes/cub3D.h"
 
-void    ft_init_colors(t_tinfo *tinfo)
-{
-    int i;
-
-    i = 0;
-    while(i < 3)
-    {
-        tinfo->floor[i] = -1;
-        tinfo->ceil[i] = -1;
-        i++;
-    }
-}
-
 void	ft_init_structs(t_root *root)
 {
 	t_tinfo 	*tinfo;
@@ -34,10 +21,10 @@ void	ft_init_structs(t_root *root)
 	root->map = map;
 	root->mlx = mlx;
 	root->player = player;
-    root->player->n_players = 0;
 	root->errors = errors; 
 	root->error_msg = NULL;
-    ft_init_colors(root->tinfo);
+    root->tinfo->ceil[0] = -1;
+    root->tinfo->floor[0] = -1;
 }
 
 void ft_init_errors_struct(t_errors *errors)
@@ -48,6 +35,7 @@ void ft_init_errors_struct(t_errors *errors)
 
 int main(int argc, char **argv)
 {
+
 	t_root *root;
 
 	root = malloc(sizeof(t_root));
@@ -58,7 +46,6 @@ int main(int argc, char **argv)
 	if(!ft_initial_validation(argv[1], root))
 		return (1);
     ft_render_map(root);
-    //printf("floor [%d, %d, %d]", root->tinfo->floor[0], root->tinfo->floor[1], root->tinfo->floor[2]);
 	hooks(root);
     /* ft_print_info(root); */
 }

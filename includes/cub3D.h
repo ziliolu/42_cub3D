@@ -73,7 +73,6 @@ typedef struct s_player
 {
 	double x;
 	double y;
-    int n_players;
 	double plane_x;
 	double plane_y;
 	double dir_x;

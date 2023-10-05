@@ -77,10 +77,6 @@ bool ft_is_closed_map(t_map *map, t_player *player)
 		}
 		i++;
 	}
-    if(player->n_players == 0)
-    {
-        return (false);
-    }
 	return (true);
 }
 void ft_create_map_arr(t_map *map)
@@ -142,7 +138,8 @@ void ft_init_player_direction(char c, t_player *player)
 
 bool ft_init_player(char c, int x, int y, t_player *player)
 {
-    if (++player->n_players > 1)
+    static int n_player;
+    if (++n_player > 1)
         return (false);
     player->x = (double)x + 0.50;
     player->y = (double)y + 0.50;
@@ -182,8 +179,11 @@ bool ft_is_valid_map(t_root *root)
         return (false);
     if(!ft_is_closed_map(root->map, root->player))
 	    return (false);
+
     return (true);
 }
+
+
 
 bool ft_add_map_file(char *line)
 {

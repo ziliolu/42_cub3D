@@ -28,9 +28,7 @@ bool ft_add_rgb(char *path, int *arr)
 		while (path[i] != ',' && path[i+1])
 			i++;
 		tmp = ft_substr(path, start, i - start);
-        //printf("%s\n", tmp);
 		res = ft_atoi(tmp);
-        // printf("%d\n", res);
 		if (res < 0 || res > 255)
 			return (false);
 		arr[j] = res;
@@ -41,7 +39,7 @@ bool ft_add_rgb(char *path, int *arr)
 			break ;
 		start = i;
 	}
-    return (true);
+	return (true);
 }
 
 bool ft_add_paths(char *id, char *path, t_tinfo *tinfo, t_mlx *mlx)
