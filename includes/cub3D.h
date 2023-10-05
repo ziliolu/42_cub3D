@@ -40,12 +40,8 @@
 # define LEFT 65361
 # define RIGHT 65363
 
-typedef struct s_errors
-{
-	char *tinfo_is_not_complete;
-	char *not_valid_texture_or_color;
-}				t_errors;
-
+# define INCOMPLETE_TEX_OR_COLOR_ERR "incomplete color or texture area"
+# define INVALID_TEX_OR_COLOR_ERR "invalid texture or color"
 
 typedef struct s_data 
 {
@@ -78,6 +74,7 @@ typedef struct s_player
 	double dir_x;
 	double dir_y;
 	double angle;
+    int n_players;
 }				t_player;
 
 typedef struct s_ray
@@ -134,7 +131,6 @@ typedef struct s_root
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
-	t_errors	*errors;
 }				t_root;
 
 
@@ -172,5 +168,6 @@ bool is_rotating(int key_code);
 void print_rays(t_mlx *mlx, t_ray *rays, t_player *player);
 void create_rays(t_root *root);
 int close_program(t_root *root);
-
+bool ft_is_closed_map_and_there_is_player(t_map *map, t_player *player);
+bool ft_is_color_complete(int *color);
 #endif

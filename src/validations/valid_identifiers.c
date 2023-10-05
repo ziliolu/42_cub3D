@@ -42,16 +42,36 @@ bool ft_add_rgb(char *path, int *arr)
 	return (true);
 }
 
+bool ft_is_text_or_color_filled(char *id, t_tinfo *tinfo)
+{
+    if (!ft_strcmp(id, "F"))
+        return(ft_is_color_complete(tinfo->floor));
+    else if (!ft_strcmp(id, "C"))
+        return(ft_is_color_complete(tinfo->ceil));
+    else if (!ft_strcmp(id, "NO"))
+        return(tinfo->north.img);
+    else if (!ft_strcmp(id, "SO"))
+        return (tinfo->south.img);
+    else if (!ft_strcmp(id, "WE"))
+        return (tinfo->west.img);
+    else if (!ft_strcmp(id, "EA"))
+        return (tinfo->east.img);
+    return (false);
+}
 bool ft_add_paths(char *id, char *path, t_tinfo *tinfo, t_mlx *mlx)
 {
 	int w;
 	int h;
+    if(ft_is_text_or_color_filled(id, tinfo))
+    {
+        return (false);
+    }
 	if(!ft_strcmp(id, "F"))
 		return (ft_add_rgb(path, tinfo->floor));
 	else if(!ft_strcmp(id, "C"))
 		return (ft_add_rgb(path, tinfo->ceil));
 	if(open(path, O_RDONLY) == -1 || !ft_is_valid_extension(path, ".xpm"))
-		return (false); 
+		return (false);
 	else if(!ft_strcmp(id, "NO") && !tinfo->north.img)
 	{
 		tinfo->north.img = mlx_xpm_file_to_image(mlx->mlx, \
@@ -95,7 +115,7 @@ bool ft_valid_identifier(char *id, char *path, t_root *root)
 
 bool ft_verify_identifiers(char *str, t_root *root)
 {
-	int i; 
+	int i;
 	char *tmp;
 	char *identifier;
 	char *path;
