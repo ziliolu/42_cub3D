@@ -6,7 +6,7 @@
 /*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/04 15:10:14 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/05 16:57:28 by riolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,26 +109,38 @@ void ft_create_map_arr(t_map *map)
 
 void ft_init_player_direction(char c, t_player *player)
 {
-    if(c == 'N' || c == 'S')
-    {
-        player->plane_x = FOV;
-        player->plane_y = 0;
-        player->dir_x = 0;
-        if(c == 'N')
-            player->dir_y = -1;
-        else
-            player->dir_y = 1;
-    }
-    else
-    {
-        player->plane_x = 0;
-        player->plane_y = FOV;
-        player->dir_y = 0;
-        if(c == 'W')
-            player->dir_x = -1;
-        else
-            player->dir_x = 1;
-    }
+	if(c == 'N' || c == 'S')
+	{
+		player->plane_x = FOV;
+		player->plane_y = 0;
+		player->dir_x = 0;
+		if(c == 'N')
+		{
+			player->dir_y = -1;
+			player->angle = 90;
+		}
+		else
+		{
+			player->dir_y = 1;
+			player->angle = 270;
+		}
+	}
+	else
+	{
+		player->plane_x = 0;
+		player->plane_y = FOV;
+		player->dir_y = 0;
+		if(c == 'W')
+		{
+			player->dir_x = -1;
+			player->angle = 180;
+		}
+		else
+		{
+			player->dir_x = 1;
+			player->angle = 0;
+		}
+	}
 }
 
 bool ft_init_player(char c, int x, int y, t_player *player)
@@ -146,28 +158,28 @@ bool ft_init_player(char c, int x, int y, t_player *player)
 
 bool ft_read_map_file(t_map *map)
 {
-    int map_file;
-    char *line;
-    int i;
+	int map_file;
+	char *line;
+	int i;
 
-    map_file = open(MAP, O_RDONLY);
-    if(!map_file)
-        return (false);
-    line = NULL;
-    while((line = get_next_line(map_file)))
-    {
-        i = 0;
-        while(line[i] && line[i] != '\n')
-        {
-            i++;
-        }
-        if(i > map->n_col)
-            map->n_col = i;
-        map->n_lines++;
-    }
-    close(map_file);
-    ft_create_map_arr(map);
-    return (true);
+	map_file = open(MAP, O_RDONLY);
+	if(!map_file)
+		return (false);
+	line = NULL;
+	while((line = get_next_line(map_file)))
+	{
+		i = 0;
+		while(line[i] && line[i] != '\n')
+		{
+			i++;
+		}
+		if(i > map->n_col)
+			map->n_col = i;
+		map->n_lines++;
+	}
+	close(map_file);
+	ft_create_map_arr(map);
+	return (true);
 }
 
 bool ft_is_valid_map(t_root *root)
@@ -176,8 +188,7 @@ bool ft_is_valid_map(t_root *root)
         return (false);
     if(!ft_check_map(root->map, root->player))
 	    return (false);
-
-    return (true);
+	return (true);
 }
 
 bool ft_add_map_file(char *line)

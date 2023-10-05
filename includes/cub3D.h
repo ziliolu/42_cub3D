@@ -16,7 +16,7 @@
 
 # define FOV 0.60
 # define SPEED 0.1
-# define ROTATION 0.05
+# define ROTATION 0.1745
 # define FLOOR_COLOR 0x00808080
 # define CEILING_COLOR 0x005A5A5A
 # define W_COLOR 0x00FF00A9
@@ -152,7 +152,8 @@ bool ft_add_map_file(char *line);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void ft_render_mini_map(t_mlx *mlx, t_map *map, t_player *player, t_ray *rays);
 t_data ft_create_square_img(t_mlx *mlx, int color, int size);
-void ft_create_map_images(t_mlx *mlx, t_map *map);
+void ft_create_map_image(t_mlx *mlx);
+void ft_create_minimap_images(t_mlx *mlx, t_map *map);
 void ft_render_map(t_root *root);
 void ft_cast_rays(t_root *root);
 void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map);
@@ -166,6 +167,7 @@ bool is_moving(int key_code);
 bool is_rotating(int key_code);
 void print_rays(t_mlx *mlx, t_ray *rays, t_player *player);
 void create_rays(t_root *root);
+int close_program(t_root *root);
 bool ft_is_closed_map_and_there_is_player(t_map *map, t_player *player);
 bool ft_is_color_complete(int *color);
 #endif

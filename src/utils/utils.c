@@ -1,5 +1,12 @@
 #include "../../includes/cub3D.h"
 
+int	close_program(t_root *root)
+{
+	//add free of the structs
+	(void)root;
+	exit(0);
+}
+
 double ft_degrees_to_radians(double degrees)
 {
     double radians;
