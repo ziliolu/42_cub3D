@@ -24,6 +24,7 @@
 # define E_COLOR 0x000074D9
 # define N_COLOR 0x00D2FF4B
 # define S_COLOR 0x00FF5733
+# define TRANSPARENCY 0x00980088
 # define MAX 1e30
 # define PI 3.14159265359
 # define MAP "map_file"
@@ -32,6 +33,7 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define SQUARE_SIZE 16
+
 
 # define ESC 65307
 # define W 119
@@ -172,4 +174,7 @@ void create_rays(t_root *root);
 int close_program(t_root *root);
 bool ft_is_closed_map_and_there_is_player(t_map *map, t_player *player);
 bool ft_is_color_complete(int *color);
+void	ft_init_structs(t_root *root);
+int	ft_puthexa(unsigned long n, char *base);
+
 #endif

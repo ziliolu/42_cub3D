@@ -18,6 +18,7 @@ SRC =	./main.c									\
 		./src/utils/utils.c							\
 		./src/utils/game_loop.c						\
 		./src/utils/game_loop_utils.c				\
+		./src/utils/ft_init_structs.c				\
 		./src/raycaster/my_mlx_pixel_put.c			\
 		./src/raycaster/ft_display_player.c			\
 		./src/raycaster/render_map.c				\

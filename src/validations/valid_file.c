@@ -92,7 +92,11 @@ bool ft_is_valid_file(char *str, t_root *root)
 	}
 	close (fd);
 	free(line);
-	return (root->is_empty_file);
+    if(root->is_empty_file)
+    {
+        return (false);
+    }
+	return (true);
 }
 
 //todas as chamadas para error sao dadas aqui, assim evitamos double frees

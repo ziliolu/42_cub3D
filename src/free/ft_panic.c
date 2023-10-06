@@ -28,9 +28,9 @@ void ft_free_mlx(t_root *root)
 {
     mlx_destroy_image(root->mlx->mlx, root->mlx->map.img);
     mlx_destroy_image(root->mlx->mlx, root->tinfo->north.img);
-    mlx_destroy_image(root->mlx->mlx, root->tinfo->north.img);
-    mlx_destroy_image(root->mlx->mlx, root->tinfo->north.img);
-    mlx_destroy_image(root->mlx->mlx, root->tinfo->north.img);
+    mlx_destroy_image(root->mlx->mlx, root->tinfo->south.img);
+    mlx_destroy_image(root->mlx->mlx, root->tinfo->west.img);
+    mlx_destroy_image(root->mlx->mlx, root->tinfo->east.img);
     mlx_destroy_window(root->mlx->mlx, root->mlx->win);
     mlx_destroy_display(root->mlx);
 }

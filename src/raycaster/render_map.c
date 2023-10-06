@@ -9,6 +9,11 @@ void ft_create_map_image(t_mlx *mlx)
 	mlx->map = map;
 }
 
+int ft_create_argb(int transparency, int r, int g, int b)
+{
+	return (transparency << 24 | r << 16 | g << 8 | b);
+}
+
 void ft_render_map(t_root *root)
 {
 	int i;
@@ -20,9 +25,9 @@ void ft_render_map(t_root *root)
 	{
 		j = -1;
 		if (i < SCREEN_HEIGHT / 2)
-			color = CEILING_COLOR;
+			color = ft_create_argb(TRANSPARENCY, root->tinfo->ceil[0], root->tinfo->ceil[1], root->tinfo->ceil[2]);
 		else
-			color = FLOOR_COLOR;
+			color = ft_create_argb(TRANSPARENCY, root->tinfo->floor[0], root->tinfo->floor[1], root->tinfo->floor[2]);
 		while (++j < SCREEN_WIDTH)
 			my_mlx_pixel_put(&root->mlx->map, j, i, color);
 	}
