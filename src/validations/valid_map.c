@@ -86,7 +86,7 @@ void ft_create_map_arr(t_map *map)
 	i = 0;
 	while(i < map->n_lines)
 	{
-		map->map_arr[i] = calloc(sizeof(char), map->n_col);
+		map->map_arr[i] = calloc(sizeof(char), map->n_col + 1);
 		i++;
 	}
 	line = NULL;
@@ -176,6 +176,7 @@ bool ft_read_map_file(t_map *map)
 		if(i > map->n_col)
 			map->n_col = i;
 		map->n_lines++;
+        free(line);
 	}
 	close(map_file);
 	ft_create_map_arr(map);

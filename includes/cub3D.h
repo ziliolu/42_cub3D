@@ -13,6 +13,7 @@
 # include <math.h>
 # include <stdlib.h> 
 # include <stdint.h>
+# include <string.h>
 
 # define FOV 0.60
 # define SPEED 0.1
@@ -114,14 +115,15 @@ typedef struct s_mlx
 {
 	void *mlx;
 	void *win;
-	t_data floor;
-	t_data wall;
+//	t_data floor;
+//	t_data wall;
 	t_data map;
 	t_data mini_map;
 }				t_mlx;
 
 typedef struct s_root
 {
+    bool        is_empty_file;
 	double		wall_num;
 	double		camera_x;
     int         hit_wall;

@@ -31,9 +31,15 @@ void	ft_init_structs(t_root *root)
 	root->map = map;
 	root->mlx = mlx;
 	root->player = player;
-  player->n_players = 0;
+    player->n_players = 0;
 	root->error_msg = NULL;
     ft_init_colors(root->tinfo);
+    memset(&root->tinfo->north, 0, sizeof(t_data));
+    memset(&root->tinfo->south, 0, sizeof(t_data));
+    memset(&root->tinfo->west, 0, sizeof(t_data));
+    memset(&root->tinfo->east, 0, sizeof(t_data));
+    root->map->n_col = 0;
+    root->map->n_lines = 0;
 }
 
 int main(int argc, char **argv)
@@ -44,10 +50,11 @@ int main(int argc, char **argv)
 	ft_init_structs(root);
 	if (argc != 2)
 		return (ft_panic(root));
+	ft_create_map_image(root->mlx);
 	if(!ft_initial_validation(argv[1], root))
 		return (1);
 	ft_create_minimap_images(root->mlx, root->map);
-	ft_create_map_image(root->mlx);
 	ft_render_map(root);
 	hooks(root);
+    //ft_panic(root);
 }

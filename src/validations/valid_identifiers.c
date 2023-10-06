@@ -58,10 +58,12 @@ bool ft_is_text_or_color_filled(char *id, t_tinfo *tinfo)
         return (tinfo->east.img);
     return (false);
 }
+
 bool ft_add_paths(char *id, char *path, t_tinfo *tinfo, t_mlx *mlx)
 {
 	int w;
 	int h;
+
     if(ft_is_text_or_color_filled(id, tinfo))
     {
         return (false);
@@ -119,8 +121,10 @@ bool ft_verify_identifiers(char *str, t_root *root)
 	char *tmp;
 	char *identifier;
 	char *path;
+    bool result;
 
 	tmp = ft_strtrim(str, " ");
+    result = true;
 	i = 0;
 
 	while(tmp[i] && tmp[i] != ' ')
@@ -130,8 +134,9 @@ bool ft_verify_identifiers(char *str, t_root *root)
 		i++;
 	path = ft_substr(tmp, i, ft_strlen(tmp) - i - 1);
 	if(!ft_valid_identifier(identifier, path, root))
-		return (false);
-
+        result = false;
 	free(tmp);
-	return (true);
+	free(path);
+    free(identifier);
+    return (result);
 }

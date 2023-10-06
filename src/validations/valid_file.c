@@ -56,16 +56,17 @@ bool ft_is_valid_file(char *str, t_root *root)
 	char *line;
 	char *tmp;
 	int copy_map;
-
-	fd = open(str, O_RDONLY);
+    fd = open(str, O_RDONLY);
 	copy_map = 0;
 	if(open(MAP, O_RDWR) != -1)
 		open(MAP, O_CREAT | O_RDWR | O_TRUNC, S_IRWXU);
 	if(fd == -1)
         return (false);
 	line = NULL;
+    root->is_empty_file = true;
 	while((line = get_next_line(fd)))
 	{
+        root->is_empty_file = false;
 		tmp = ft_get_trimmed_line(line);
 		if((tmp[0] == '\n' && copy_map == 1) || ((ft_isdigit(tmp[0]) || tmp[0] == ' ') && ft_str_is_map_type(line)))
 		{
@@ -91,7 +92,7 @@ bool ft_is_valid_file(char *str, t_root *root)
 	}
 	close (fd);
 	free(line);
-	return (true);
+	return (root->is_empty_file);
 }
 
 //todas as chamadas para error sao dadas aqui, assim evitamos double frees
