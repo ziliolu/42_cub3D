@@ -4,7 +4,7 @@ LIB = lib.a
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -I./includes
-MLXFLAGS = -g -L./mlx -lmlx -lXext -lX11 -lm #-lbsd
+MLXFLAGS = -g -L./mlx  -lXext -lX11 -lmlx -lm #-lbsd
 RM = rm -f
 
 SRC =	./main.c									\
@@ -19,6 +19,7 @@ SRC =	./main.c									\
 		./src/utils/game_loop.c						\
 		./src/utils/game_loop_utils.c				\
 		./src/utils/movements.c						\
+		./src/utils/ft_init_structs.c				\
 		./src/raycaster/my_mlx_pixel_put.c			\
 		./src/raycaster/ft_display_player.c			\
 		./src/raycaster/render_map.c				\

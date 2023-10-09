@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:10 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/09/30 10:29:25 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/06 18:54:45 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,12 @@ bool ft_is_text_or_color_filled(char *id, t_tinfo *tinfo)
         return (tinfo->east.img);
     return (false);
 }
+
 bool ft_add_paths(char *id, char *path, t_tinfo *tinfo, t_mlx *mlx)
 {
 	int w;
 	int h;
+
     if(ft_is_text_or_color_filled(id, tinfo))
     {
         return (false);
@@ -119,19 +121,22 @@ bool ft_verify_identifiers(char *str, t_root *root)
 	char *tmp;
 	char *identifier;
 	char *path;
+    bool result;
 
-	tmp = ft_strtrim(str, " ");
+	tmp = ft_strtrim(str, "\n");
+    result = true;
 	i = 0;
 
 	while(tmp[i] && tmp[i] != ' ')
 		i++;
-	identifier = ft_substr(tmp, 0, i);
+	identifier = ft_substr(tmp, 0, i - 1);
 	while(tmp[i] && tmp[i] == ' ')
 		i++;
 	path = ft_substr(tmp, i, ft_strlen(tmp) - i - 1);
 	if(!ft_valid_identifier(identifier, path, root))
-		return (false);
-
+        result = false;
 	free(tmp);
-	return (true);
+	free(path);
+    free(identifier);
+    return (result);
 }
