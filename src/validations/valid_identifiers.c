@@ -123,13 +123,13 @@ bool ft_verify_identifiers(char *str, t_root *root)
 	char *path;
     bool result;
 
-	tmp = ft_strtrim(str, " ");
+	tmp = ft_strtrim(str, "\n");
     result = true;
 	i = 0;
 
 	while(tmp[i] && tmp[i] != ' ')
 		i++;
-	identifier = ft_substr(tmp, 0, i);
+	identifier = ft_substr(tmp, 0, i - 1);
 	while(tmp[i] && tmp[i] == ' ')
 		i++;
 	path = ft_substr(tmp, i, ft_strlen(tmp) - i - 1);
