@@ -134,7 +134,7 @@ void ft_init_player_direction(char c, t_player *player)
 		{
 			player->plane_y = -FOV;
 			player->dir_x = -1;
-			player->angle = 90;
+			player->angle = 180;
 		}
 		else
 		{
