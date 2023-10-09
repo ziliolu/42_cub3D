@@ -4,11 +4,7 @@ void check_colision(double x_value, double y_value, t_root *root)
 {
 	int x;
 	int y;
-	/* int marginx;
-	int marginy;
 
-	marginx = (int)x_value;
-	marginy = (int)y_value; */
 	x = (int)x_value;
 	y = (int)y_value;
 	if (root->map->map_arr[y][x] == '1')
@@ -20,7 +16,6 @@ void check_colision(double x_value, double y_value, t_root *root)
 
 void	player_movement(t_player *player,  int key_code, t_root *root)
 {
-	/* if (player->angle >) */
 	double x_value;
 	double y_value;
 
@@ -32,18 +27,31 @@ void	player_movement(t_player *player,  int key_code, t_root *root)
 		check_colision(player->x - x_value, player->y - y_value, root);
 	if (key_code == A)
 	{
-		check_colision(player->x - y_value, player->y - x_value, root);
-		/* if (y_value <= 0) */
-		/* else
-			check_colision(player->x + y_value, player->y + x_value, root); */
+		printf("\nKEY A\n");
+		printf("DirX: %f    DirY: %f\n", player->dir_x, player->dir_y);
+		printf("conversion: %f  %f\n", player->dir_x, (double)1);
+		printf("fabs: %f  %f\n", fabs(player->dir_x), (double)1);
+		if (fabs(player->dir_x) == (double)1)
+		{
+			printf("FDS\n");
+			check_colision(player->x - y_value, player->y - x_value, root);
+		}
+		else
+		{
+			printf("FDSSSSSSSSSSS\n");
+			check_colision(player->x + y_value, player->y + x_value, root);
+		}
 	}
 	if (key_code == D)
 	{
-		check_colision(player->x + y_value, player->y + x_value, root);
-		/* if (y_value <= 0) */
-		/* else
-			check_colision(player->x - y_value, player->y - x_value, root); */
+		if (player->dir_x == 1 || player->dir_x == -1)
+		{
+			player_movement(player, A, root);
+			return ;
+		}
+		check_colision(player->x - y_value, player->y - x_value, root);
 	}
+	printf("FINAL DirX: %f  FINAL DirY: %f\n", player->dir_x, player->dir_y);
 }
 
 void player_rotation(t_player *player, int key_code, t_root *root)
@@ -51,7 +59,6 @@ void player_rotation(t_player *player, int key_code, t_root *root)
 	double oldDirX;
 	double oldPlaneX;
 	double rotation;
-	double operation;
 
 	oldDirX = player->dir_x;
 	oldPlaneX = player->plane_x;
@@ -62,9 +69,9 @@ void player_rotation(t_player *player, int key_code, t_root *root)
 	player->dir_y = oldDirX * sin(rotation) + player->dir_y * cos(rotation);
 	player->plane_x = oldPlaneX * cos(rotation) - player->plane_y * sin(rotation);
 	player->plane_y = oldPlaneX * sin(rotation) + player->plane_y * cos(rotation);
-	operation = sqrt((player->dir_x * player->dir_x) + (player->dir_y * player->dir_y));
-	player->angle = acos(player->dir_x / operation) * (180 / PI);
-	/* printf("ANGLE: %f\n", player->angle); */
+	player->angle = acos(player->dir_x) * (180 / PI);
+	if (player->dir_y > 0)
+		player->angle = (double)(360 - player->angle);
 	ft_render_map(root);
 }
 

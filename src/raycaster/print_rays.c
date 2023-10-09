@@ -2,13 +2,9 @@
 
 void print_single_ray(t_ray *rays, t_mlx *mlx, double x, double y)
 {
-	double	deltax;
-	double	deltay;
-	int		pixels;
+	int pixels;
 
-	deltax = (rays->ray_dir_x - x) / 2;
-	deltay = (rays->ray_dir_y - y) / 2;
-	pixels = sqrt((deltax * deltax) + (deltay * deltay));
+	pixels = 50;
 	while (pixels)
 	{
 		mlx_pixel_put(mlx->mlx, mlx->win, x, y, 0x000000FF);

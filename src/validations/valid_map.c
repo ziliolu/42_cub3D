@@ -6,7 +6,7 @@
 /*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/05 16:57:28 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/06 15:17:37 by riolivei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,17 @@ void ft_init_player_direction(char c, t_player *player)
 {
 	if(c == 'N' || c == 'S')
 	{
-		player->plane_x = FOV;
 		player->plane_y = 0;
 		player->dir_x = 0;
 		if(c == 'N')
 		{
+			player->plane_x = FOV;
 			player->dir_y = -1;
 			player->angle = 90;
 		}
 		else
 		{
+			player->plane_x = -FOV;
 			player->dir_y = 1;
 			player->angle = 270;
 		}
@@ -128,15 +129,16 @@ void ft_init_player_direction(char c, t_player *player)
 	else
 	{
 		player->plane_x = 0;
-		player->plane_y = FOV;
 		player->dir_y = 0;
 		if(c == 'W')
 		{
+			player->plane_y = -FOV;
 			player->dir_x = -1;
-			player->angle = 180;
+			player->angle = 90;
 		}
 		else
 		{
+			player->plane_y = FOV;
 			player->dir_x = 1;
 			player->angle = 0;
 		}
