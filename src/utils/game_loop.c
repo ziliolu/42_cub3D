@@ -27,18 +27,31 @@ void	player_movement(t_player *player,  int key_code, t_root *root)
 		check_colision(player->x - x_value, player->y - y_value, root);
 	if (key_code == A)
 	{
-		check_colision(player->x + y_value, player->y + x_value, root);
-		/* if (player->angle > 315 && player->angle < 135) */
-		/* else
-			check_colision(player->x + y_value, player->y + x_value, root); */
+		printf("\nKEY A\n");
+		printf("DirX: %f    DirY: %f\n", player->dir_x, player->dir_y);
+		printf("conversion: %f  %f\n", player->dir_x, (double)1);
+		printf("fabs: %f  %f\n", fabs(player->dir_x), (double)1);
+		if (fabs(player->dir_x) == (double)1)
+		{
+			printf("FDS\n");
+			check_colision(player->x - y_value, player->y - x_value, root);
+		}
+		else
+		{
+			printf("FDSSSSSSSSSSS\n");
+			check_colision(player->x + y_value, player->y + x_value, root);
+		}
 	}
 	if (key_code == D)
 	{
+		if (player->dir_x == 1 || player->dir_x == -1)
+		{
+			player_movement(player, A, root);
+			return ;
+		}
 		check_colision(player->x - y_value, player->y - x_value, root);
-		/* if (y_value <= 0) */
-		/* else
-			check_colision(player->x - y_value, player->y - x_value, root); */
 	}
+	printf("FINAL DirX: %f  FINAL DirY: %f\n", player->dir_x, player->dir_y);
 }
 
 void player_rotation(t_player *player, int key_code, t_root *root)
