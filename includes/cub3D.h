@@ -125,6 +125,7 @@ typedef struct s_mlx
 
 typedef struct s_root
 {
+	int			exit_success;
     bool        is_empty_file;
 	double		wall_num;
 	double		camera_x;

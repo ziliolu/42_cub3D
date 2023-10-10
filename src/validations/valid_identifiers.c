@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:10 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/10 18:02:35 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:50:21 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ bool ft_add_rgb(char *path, int *arr)
 		tmp = ft_substr(path, start, i - start);
 		res = ft_atoi(tmp);
 		if (res < 0 || res > 255)
+		{
+			free(tmp);
 			return (false);
+		}
+			
 		arr[j] = res;
 		free(tmp);
 		if (path[i] && path[i+1])

@@ -45,4 +45,6 @@ void	ft_init_structs(t_root *root)
     ft_init_textures(root->tinfo);
     root->map->n_col = 0;
     root->map->n_lines = 0;
+    root->is_empty_file = false;
+    root->exit_success = 0;
 }
