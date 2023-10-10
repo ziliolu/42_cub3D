@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:00 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/05 15:54:49 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/10 19:43:46 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,31 +71,21 @@ bool ft_is_valid_file(char *str, t_root *root)
 		if((tmp[0] == '\n' && copy_map == 1) || ((ft_isdigit(tmp[0]) || tmp[0] == ' ') && ft_str_is_map_type(line)))
 		{
 			if(!ft_istinfo_complete(root->tinfo))
-            {
-                free(tmp);
-                free(line);
                 root->error_msg = INCOMPLETE_TEX_OR_COLOR_ERR;
-                return (false);
-            }
 			copy_map = 1;
 			ft_add_map_file(line);
 		}
 		else if(!ft_verify_identifiers(tmp, root) && ft_strcmp(tmp, "\n"))
-		{
-			free(line);
-			free(tmp);
 			root->error_msg = INVALID_TEX_OR_COLOR_ERR;
-			return (false);
-		}
 		free(tmp);
 		free(line);
 	}
-	close (fd);
 	free(line);
-    if(root->is_empty_file)
-    {
-        return (false);
-    }
+	close (fd);
+    if(root->is_empty_file || root->error_msg)
+	{
+    	return (false);
+	}
 	return (true);
 }
 

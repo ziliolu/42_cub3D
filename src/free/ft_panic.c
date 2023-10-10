@@ -68,8 +68,11 @@ int ft_panic(t_root *root)
 	ft_free_minimap_imgs(root);
 	ft_free_mlx(root);
 	free(root->tinfo);
-	if(root->map->map_arr)
-		ft_free_double_arr(root->map->map_arr);
+	if(root->exit_success)
+	{
+		if(root->map->map_arr)
+			ft_free_double_arr(root->map->map_arr);
+	}
 	free(root->mlx);
 	free(root->map);
 	free(root);

@@ -17,18 +17,22 @@ void check_colision(double x_value, double y_value, t_root *root)
 bool ft_is_quadrant (int key_code, t_player *player, t_root *root)
 {
     double angle;
+    double x_value;
+	double y_value;
 
     angle = round(player->angle);
+    x_value = player->dir_x * SPEED;
+	y_value = player->dir_y * SPEED;
     if (angle == 0 || angle == 90 || angle == 180 || angle == 270 || angle == 360)
             return false;
     if ((key_code == A && angle > 0 && angle < 90) || (key_code == D && angle > 180 && angle < 270))
-        check_colision(player->x - SPEED, player->y - SPEED, root);
+        check_colision(player->x - x_value, player->y - y_value, root);
     else if ((key_code == A && angle > 90 && angle < 180) || (key_code == D && angle > 270 && angle < 360))
-        check_colision(player->x - SPEED, player->y + SPEED, root);
+        check_colision(player->x - x_value, player->y + y_value, root);
     else if ((key_code == A && angle > 180 && angle < 270) || (key_code == D && angle > 0 && angle < 90))
-        check_colision(player->x + SPEED, player->y + SPEED, root);
+        check_colision(player->x + x_value, player->y + y_value, root);
     else if ((key_code == A && angle > 270 && angle < 360) || (key_code == D && angle > 90 && angle < 180))
-        check_colision(player->x + SPEED, player->y - SPEED, root);
+        check_colision(player->x + x_value, player->y - y_value, root);
     return true;
 }
 
