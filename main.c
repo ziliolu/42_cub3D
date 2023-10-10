@@ -14,5 +14,5 @@ int main(int argc, char **argv)
 	ft_create_minimap_images(root->mlx, root->map);
 	ft_render_map(root);
 	hooks(root);
-    //ft_panic(root);
+    ft_panic(root);
 }

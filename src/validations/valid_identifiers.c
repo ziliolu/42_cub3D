@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:10 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/06 18:54:45 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/10 18:02:35 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool ft_add_rgb(char *path, int *arr)
 			return (false);
 		arr[j] = res;
 		free(tmp);
-		if (path[i+1])
+		if (path[i] && path[i+1])
 			i++;
 		else
 			break ;
@@ -64,10 +64,13 @@ bool ft_add_paths(char *id, char *path, t_tinfo *tinfo, t_mlx *mlx)
 	int w;
 	int h;
 
+	if(!id)
+		return (false);
+	
     if(ft_is_text_or_color_filled(id, tinfo))
-    {
+	{
         return (false);
-    }
+	}
 	if(!ft_strcmp(id, "F"))
 		return (ft_add_rgb(path, tinfo->floor));
 	else if(!ft_strcmp(id, "C"))
@@ -126,13 +129,12 @@ bool ft_verify_identifiers(char *str, t_root *root)
 	tmp = ft_strtrim(str, "\n");
     result = true;
 	i = 0;
-
 	while(tmp[i] && tmp[i] != ' ')
 		i++;
-	identifier = ft_substr(tmp, 0, i - 1);
+	identifier = ft_substr(tmp, 0, i);
 	while(tmp[i] && tmp[i] == ' ')
 		i++;
-	path = ft_substr(tmp, i, ft_strlen(tmp) - i - 1);
+	path = ft_substr(tmp, i, (ft_strlen(tmp) - i));
 	if(!ft_valid_identifier(identifier, path, root))
         result = false;
 	free(tmp);
