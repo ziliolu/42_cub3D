@@ -2,7 +2,7 @@
 
 int	close_program(t_root *root)
 {
-	//add free of the structs
+	ft_panic(root);
 	(void)root;
 	exit(0);
 }
