@@ -14,7 +14,7 @@ int ft_create_argb(int transparency, int r, int g, int b)
 	return (transparency << 24 | r << 16 | g << 8 | b);
 }
 
-void ft_render_map(t_root *root)
+int ft_render_map(t_root *root)
 {
 	int i;
 	int j;
@@ -34,4 +34,6 @@ void ft_render_map(t_root *root)
 	mlx_put_image_to_window(root->mlx->mlx, root->mlx->win, root->mlx->map.img, 0, 0);
     ft_cast_rays(root);
     ft_render_mini_map(root->mlx, root->map, root->player, root->rays);
+	ft_movements(root, root->player, root->moves);
+	return (0);
 }

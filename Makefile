@@ -18,7 +18,6 @@ SRC =	./main.c									\
 		./src/utils/utils.c							\
 		./src/utils/game_loop.c						\
 		./src/utils/game_loop_utils.c				\
-		./src/utils/movements.c						\
 		./src/utils/ft_init_structs.c				\
 		./src/raycaster/my_mlx_pixel_put.c			\
 		./src/raycaster/ft_display_player.c			\
@@ -43,6 +42,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f map_file
 
 re: fclean all
 

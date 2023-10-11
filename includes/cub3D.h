@@ -16,7 +16,7 @@
 # include <string.h>
 
 # define FOV 0.60
-# define SPEED 0.1
+# define SPEED 0.05
 # define ROTATION 0.1745
 # define FLOOR_COLOR 0x00808080
 # define CEILING_COLOR 0x005A5A5A
@@ -33,7 +33,6 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 # define SQUARE_SIZE 16
-
 
 # define ESC 65307
 # define W 119
@@ -78,6 +77,7 @@ typedef struct s_player
 	double dir_y;
 	double angle;
     int n_players;
+	int old_mouseX;
 }				t_player;
 
 typedef struct s_ray
@@ -117,11 +117,19 @@ typedef struct s_mlx
 {
 	void *mlx;
 	void *win;
-//	t_data floor;
-//	t_data wall;
 	t_data map;
 	t_data mini_map;
 }				t_mlx;
+
+typedef struct s_moves
+{
+	int w_press;
+	int s_press;
+	int a_press;
+	int d_press;
+	int left_press;
+	int right_press;
+}				t_moves;
 
 typedef struct s_root
 {
@@ -136,6 +144,7 @@ typedef struct s_root
 	t_map		*map;
 	t_mlx		*mlx;
 	t_player	*player;
+	t_moves		*moves;
 }				t_root;
 
 
@@ -159,7 +168,7 @@ void ft_render_mini_map(t_mlx *mlx, t_map *map, t_player *player, t_ray *rays);
 t_data ft_create_square_img(t_mlx *mlx, int color, int size);
 void ft_create_map_image(t_mlx *mlx);
 void ft_create_minimap_images(t_mlx *mlx, t_map *map);
-void ft_render_map(t_root *root);
+int ft_render_map(t_root *root);
 void ft_cast_rays(t_root *root);
 void ft_dda_algorithm(t_root *root, t_ray *ray, t_map *map);
 void ft_set_step_and_side_dist(t_ray *ray, t_player *player, t_map *map);
@@ -168,8 +177,8 @@ void ft_draw(t_ray *ray, t_root *root, int i);
 bool ft_is_player(char c);
 bool ft_init_player(char c, int x, int y, t_player *player);
 void hooks(t_root *root);
-bool is_moving(int key_code);
-bool is_rotating(int key_code);
+void is_moving(int key_code, int flag, t_moves *moves);
+void is_rotating(int key_code, int flag, t_moves *moves);
 void print_rays(t_mlx *mlx, t_ray *rays, t_player *player);
 void create_rays(t_root *root);
 int close_program(t_root *root);
@@ -177,5 +186,10 @@ bool ft_is_closed_map_and_there_is_player(t_map *map, t_player *player);
 bool ft_is_color_complete(int *color);
 void	ft_init_structs(t_root *root);
 int	ft_puthexa(unsigned long n, char *base);
+int	on_key_press(int key_code, t_root *root);
+int on_key_release(int key_code, t_root *root);
+void ft_movements(t_root *root, t_player *player, t_moves *moves);
+void	player_movement(t_player *player,  int key_code, t_root *root);
+void player_rotation(t_player *player, int key_code);
 
 #endif

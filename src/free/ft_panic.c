@@ -75,6 +75,7 @@ int ft_panic(t_root *root)
 	}
 	free(root->mlx);
 	free(root->map);
+	free(root->moves);
 	free(root);
 	return (0);
 }
