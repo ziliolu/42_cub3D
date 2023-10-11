@@ -19,20 +19,15 @@ bool ft_is_quadrant (int key_code, t_player *player, t_root *root)
 	double x_value;
 	double y_value;
 
-	if (angle == 0 || angle == 90 || angle == 180 || angle == 270 || angle == 360)
-			return false;
 	angle = round(player->angle);
+	if (angle == 0 || angle == 90 || angle == 180 || angle == 270)
+		return false;
 	x_value = player->plane_x * SPEED;
 	y_value = player->plane_y * SPEED;
-	/* if (key_code == A) */
-	if ((key_code == A && angle > 0 && angle < 90) || (key_code == D && angle > 180 && angle < 270))
+	if (key_code == A)
 		check_colision(player->x - x_value, player->y - y_value, root);
-	else if ((key_code == A && angle > 90 && angle < 180) || (key_code == D && angle > 270 && angle < 360))
-		check_colision(player->x - y_value, player->y + x_value, root);
-	else if ((key_code == A && angle > 180 && angle < 270) || (key_code == D && angle > 0 && angle < 90))
-		check_colision(player->x + y_value, player->y + x_value, root);
-	else if ((key_code == A && angle > 270 && angle < 360) || (key_code == D && angle > 90 && angle < 180))
-		check_colision(player->x + y_value, player->y - x_value, root);
+	if (key_code == D)
+		check_colision(player->x + x_value, player->y + y_value, root);
 	return true;
 }
 
@@ -51,20 +46,14 @@ void	player_movement(t_player *player,  int key_code, t_root *root)
 		check_colision(player->x - x_value, player->y - y_value, root);
 	else if (!ft_is_quadrant(key_code, player, root))
 	{
-		if (angle == 0 || angle == 180)
-		{
-			if(key_code == A)
-				check_colision(player->x - y_value, player->y - x_value, root);
-			else
-				check_colision(player->x + y_value, player->y + x_value, root);
-		}
-		else if(angle == 90 || angle == 270)
-		{
-			if(key_code == A)
-				check_colision(player->x + y_value, player->y + x_value, root);
-			else
-				check_colision(player->x - y_value, player->y - x_value, root);
-		}
+		if ((key_code == A && angle == 0) || (key_code == D && angle == 180))
+			check_colision(player->x, player->y - SPEED / 2, root);
+		if ((key_code == A && angle == 90) || (key_code == D && angle == 270))
+			check_colision(player->x - SPEED / 2, player->y, root);
+		if ((key_code == A && angle == 180) || (key_code == D && angle == 0))
+			check_colision(player->x, player->y + SPEED / 2, root);
+		if ((key_code == A && angle == 270) || (key_code == D && angle == 90))
+			check_colision(player->x + SPEED / 2, player->y, root);
 	}
 }
 

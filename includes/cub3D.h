@@ -34,7 +34,6 @@
 # define TEX_HEIGHT 64
 # define SQUARE_SIZE 16
 
-
 # define ESC 65307
 # define W 119
 # define A 97
@@ -78,6 +77,7 @@ typedef struct s_player
 	double dir_y;
 	double angle;
     int n_players;
+	int old_mouseX;
 }				t_player;
 
 typedef struct s_ray
