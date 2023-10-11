@@ -60,4 +60,6 @@ void	ft_init_structs(t_root *root)
 	root->map->n_col = 0;
 	root->map->n_lines = 0;
 	ft_init_moves(root);
+    root->is_empty_file = false;
+    root->exit_success = 0;
 }

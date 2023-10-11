@@ -9,10 +9,10 @@ int main(int argc, char **argv)
 	if (argc != 2)
 		return (ft_panic(root));
 	ft_create_map_image(root->mlx);
+	ft_create_minimap_images(root->mlx, root->map);
 	if(!ft_initial_validation(argv[1], root))
 		return (1);
-	ft_create_minimap_images(root->mlx, root->map);
 	ft_render_map(root);
 	hooks(root);
-    //ft_panic(root);
+    ft_panic(root);
 }

@@ -8,14 +8,6 @@
 - [ ] leaks 
 - [ ] norminette
 
-# maps with problems (not solved)
-## good
-- [ ] dungeon.cub
-- [ ] subject_map.cub
-- [ ] test_whitespace.cub
-- 
-## bad
-
 
 
 

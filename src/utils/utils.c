@@ -2,7 +2,8 @@
 
 int	close_program(t_root *root)
 {
-	//add free of the structs
+	root->exit_success = 1;
+	ft_panic(root);
 	(void)root;
 	exit(0);
 }
