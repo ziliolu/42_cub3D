@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:13 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/06 15:17:37 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:32:42 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool ft_check_map(t_map *map, t_player *player)
 			if(ft_is_player(map->map_arr[i][j]) || map->map_arr[i][j] == '0')
             {
                 if (!ft_check_all_sides(map, i, j) || !ft_init_player(map->map_arr[i][j], j, i, player))
-                    return (false);
+					return (false);
             }
 			j++;
 		}
@@ -190,7 +190,7 @@ bool ft_is_valid_map(t_root *root)
 	if(!ft_read_map_file(root->map))
         return (false);
     if(!ft_check_map(root->map, root->player))
-	    return (false);
+		return (false);
 	return (true);
 }
 

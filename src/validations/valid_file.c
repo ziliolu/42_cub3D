@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:57:00 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/10 19:43:46 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:07:35 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ bool ft_is_valid_file(char *str, t_root *root)
 	return (true);
 }
 
-//todas as chamadas para error sao dadas aqui, assim evitamos double frees
 bool ft_initial_validation(char *str, t_root *root)
 {
 	if (!ft_is_valid_extension(str, ".cub"))
