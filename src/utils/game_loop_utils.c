@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_loop_utils.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/12 15:54:19 by riolivei          #+#    #+#             */
+/*   Updated: 2023/10/12 15:54:37 by riolivei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
-void is_moving(int key_code, int flag, t_moves *moves)
+void	is_moving(int key_code, int flag, t_moves *moves)
 {
 	if (key_code == W)
 		moves->w_press = flag;
@@ -12,7 +24,7 @@ void is_moving(int key_code, int flag, t_moves *moves)
 		moves->d_press = flag;
 }
 
-void is_rotating(int key_code, int flag, t_moves *moves)
+void	is_rotating(int key_code, int flag, t_moves *moves)
 {
 	if (key_code == LEFT)
 		moves->left_press = flag;
@@ -29,14 +41,14 @@ int	on_key_press(int key_code, t_root *root)
 	return (0);
 }
 
-int on_key_release(int key_code, t_root *root)
+int	on_key_release(int key_code, t_root *root)
 {
 	is_moving(key_code, 0, root->moves);
 	is_rotating(key_code, 0, root->moves);
 	return (0);
 }
 
-void ft_movements(t_root *root, t_player *player, t_moves *moves)
+void	ft_movements(t_root *root, t_player *player, t_moves *moves)
 {
 	if (moves->w_press)
 		player_movement(player, W, root);

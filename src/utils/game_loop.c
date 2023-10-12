@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/12 15:52:11 by riolivei          #+#    #+#             */
+/*   Updated: 2023/10/12 15:53:48 by riolivei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
-void check_colision(double x_value, double y_value, t_root *root)
+void	check_colision(double x_value, double y_value, t_root *root)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = (int)x_value;
 	y = (int)y_value;
@@ -13,29 +25,29 @@ void check_colision(double x_value, double y_value, t_root *root)
 	root->player->y = y_value;
 }
 
-bool ft_is_quadrant (int key_code, t_player *player, t_root *root)
+bool	ft_is_quadrant(int key_code, t_player *player, t_root *root)
 {
-	double angle;
-	double x_value;
-	double y_value;
+	double	angle;
+	double	x_value;
+	double	y_value;
 
 	angle = round(player->angle);
 	if (angle == 0 || angle == 90 || angle == 180 || angle == 270)
-		return false;
+		return (false);
 	x_value = player->plane_x * SPEED;
 	y_value = player->plane_y * SPEED;
 	if (key_code == A)
 		check_colision(player->x - x_value, player->y - y_value, root);
 	if (key_code == D)
 		check_colision(player->x + x_value, player->y + y_value, root);
-	return true;
+	return (true);
 }
 
-void	player_movement(t_player *player,  int key_code, t_root *root)
+void	player_movement(t_player *player, int key_code, t_root *root)
 {
-	double angle;
-	double x_value;
-	double y_value;
+	double	angle;
+	double	x_value;
+	double	y_value;
 
 	angle = round(player->angle);
 	x_value = player->dir_x * SPEED;
@@ -57,21 +69,23 @@ void	player_movement(t_player *player,  int key_code, t_root *root)
 	}
 }
 
-void player_rotation(t_player *player, int key_code)
+void	player_rotation(t_player *player, int key_code)
 {
-	double oldDirX;
-	double oldPlaneX;
-	double rotation;
+	double	old_dirx;
+	double	old_planex;
+	double	rotation;
 
-	oldDirX = player->dir_x;
-	oldPlaneX = player->plane_x;
+	old_dirx = player->dir_x;
+	old_planex = player->plane_x;
 	rotation = SPEED;
 	if (key_code == LEFT)
 		rotation *= -1;
-	player->dir_x = oldDirX * cos(rotation) - player->dir_y * sin(rotation);
-	player->dir_y = oldDirX * sin(rotation) + player->dir_y * cos(rotation);
-	player->plane_x = oldPlaneX * cos(rotation) - player->plane_y * sin(rotation);
-	player->plane_y = oldPlaneX * sin(rotation) + player->plane_y * cos(rotation);
+	player->dir_x = old_dirx * cos(rotation) - player->dir_y * sin(rotation);
+	player->dir_y = old_dirx * sin(rotation) + player->dir_y * cos(rotation);
+	player->plane_x = old_planex * cos(rotation) - player->plane_y
+		* sin(rotation);
+	player->plane_y = old_planex * sin(rotation) + player->plane_y
+		* cos(rotation);
 	player->angle = acos(player->dir_x) * (180 / PI);
 	if (player->dir_y > 0)
 		player->angle = (double)(360 - player->angle);

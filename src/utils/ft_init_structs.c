@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_init_structs.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/12 15:01:46 by riolivei          #+#    #+#             */
+/*   Updated: 2023/10/12 16:52:03 by riolivei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3D.h"
 
-void ft_init_moves(t_root *root)
+void	ft_init_moves(t_root *root)
 {
-	t_moves		*moves;
+	t_moves	*moves;
 
 	moves = malloc(sizeof(t_moves));
 	moves->w_press = 0;
@@ -14,20 +26,19 @@ void ft_init_moves(t_root *root)
 	root->moves = moves;
 }
 
-void    ft_init_colors(t_tinfo *tinfo)
+void	ft_init_colors(t_tinfo *tinfo)
 {
-	int i;
+	int	i;
 
-	i = 0;
-	while(i < 3)
+	i = -1;
+	while (++i < 3)
 	{
 		tinfo->floor[i] = -1;
 		tinfo->ceil[i] = -1;
-		i++;
 	}
 }
 
-void ft_init_textures(t_tinfo *tinfo)
+void	ft_init_textures(t_tinfo *tinfo)
 {
 	memset(&tinfo->north, 0, sizeof(t_data));
 	memset(&tinfo->south, 0, sizeof(t_data));
@@ -37,9 +48,9 @@ void ft_init_textures(t_tinfo *tinfo)
 
 void	ft_init_structs(t_root *root)
 {
-	t_tinfo 	*tinfo;
+	t_tinfo		*tinfo;
 	t_map		*map;
-	t_mlx		 *mlx;
+	t_mlx		*mlx;
 	t_player	*player;
 
 	tinfo = malloc(sizeof(t_tinfo));
@@ -48,7 +59,7 @@ void	ft_init_structs(t_root *root)
 	player = malloc(sizeof(t_player));
 	create_rays(root);
 	mlx->mlx = mlx_init();
-	mlx->win = mlx_new_window(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT	, "Cub3D");
+	mlx->win = mlx_new_window(mlx->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "Cub3D");
 	root->tinfo = tinfo;
 	root->map = map;
 	root->mlx = mlx;
@@ -60,6 +71,6 @@ void	ft_init_structs(t_root *root)
 	root->map->n_col = 0;
 	root->map->n_lines = 0;
 	ft_init_moves(root);
-    root->is_empty_file = false;
-    root->exit_success = 0;
+	root->is_empty_file = false;
+	root->exit_success = 0;
 }

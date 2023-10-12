@@ -4,17 +4,18 @@ LIB = lib.a
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -I./includes
-MLXFLAGS = -g -L./mlx  -lXext -lX11 -lmlx -lm #-lbsd
+MLXFLAGS = -g -L./mlx  -lXext -lX11 -lmlx -lm -fsanitize=address
 RM = rm -f
 
 SRC =	./main.c									\
-		./src/print/ft_print_textures.c 			\
-		./src/print/ft_print_arr.c					\
-		./src/print/ft_print_info.c					\
 		./src/free/ft_panic.c						\
 		./src/validations/valid_file.c				\
+		./src/validations/valid_file_utils.c		\
 		./src/validations/valid_identifiers.c		\
+		./src/validations/valid_identifiers_utils.c	\
 		./src/validations/valid_map.c				\
+		./src/validations/valid_map_utils.c			\
+		./src/validations/valid_map_utils2.c		\
 		./src/utils/utils.c							\
 		./src/utils/game_loop.c						\
 		./src/utils/game_loop_utils.c				\
