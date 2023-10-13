@@ -1,3 +1,4 @@
+NO textures/test/north.xpm        
 
 
 
@@ -6,16 +7,7 @@
 
 
 
-  NO textures/test/north.xpm 
-
-
-
-
-
-
-
-
-SO textures/test/south.xpm
+             SO textures/test/south.xpm
                         WE textures/test/west.xpm
         EA textures/test/east.xpm            
 

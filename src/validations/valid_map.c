@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:02:29 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/12 18:33:31 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:45:04 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,14 @@ void	ft_create_map_arr(t_map *map)
 	int		i;
 
 	map_file = open(MAP, O_RDONLY);
+	map->is_map_allocated = 1;
 	map->map_arr = calloc(sizeof(char *), map->n_lines + 1);
 	i = -1;
 	while (++i < map->n_lines)
 		map->map_arr[i] = calloc(sizeof(char), map->n_col + 1);
 	get_map_arr(map, map_file);
+	if(map_file > 0)
+		close(map_file); 
 }
 
 void	ft_init_player_direction(char c, t_player *player)
@@ -67,7 +70,7 @@ bool	ft_read_map_file(t_map *map)
 	int		i;
 
 	map_file = open(MAP, O_RDONLY);
-	if (!map_file)
+	if (map_file < 0)
 		return (false);
 	line = get_next_line(map_file);
 	while (line)
@@ -81,8 +84,8 @@ bool	ft_read_map_file(t_map *map)
 		free(line);
 		line = get_next_line(map_file);
 	}
-	close(map_file);
 	ft_create_map_arr(map);
+	close(map_file);
 	return (true);
 }
 
@@ -91,7 +94,7 @@ bool	ft_add_map_file(char *line)
 	int	map_file;
 
 	map_file = open(MAP, O_CREAT | O_RDWR | O_APPEND, S_IRWXU);
-	if (!map_file)
+	if (map_file < 0)
 		return (false);
 	while (*line)
 	{

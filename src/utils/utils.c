@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:53:56 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/13 10:27:42 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:40:03 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,10 @@ char	*ft_get_trimmed_line(char *line)
 	char	*tmp;
 	char	*tmp1;
 
+    if (!ft_strcmp(line, "\n"))
+    {
+        return (ft_strdup(line));
+    }
 	tmp = ft_strtrim(line, " ");
 	tmp1 = ft_strtrim(tmp, "\t");
 	free(tmp);

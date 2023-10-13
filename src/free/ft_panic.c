@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_panic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:31:17 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/12 15:33:43 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:48:07 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,14 @@ void ft_panic_is_empty_file(t_root *root)
 
 int	ft_panic(t_root *root)
 {
+	
 	free(root->player);
 	ft_free_rays(root->rays);
 	ft_free_minimap_imgs(root);
 	ft_free_mlx(root);
 	free(root->tinfo);
-	if (root->exit_success)
-	{
-		if (root->map->map_arr)
-			ft_free_double_arr(root->map->map_arr);
-	}
+	if(root->map->is_map_allocated)
+		ft_free_double_arr(root->map->map_arr);
 	free(root->mlx);
 	free(root->map);
 	free(root->moves);

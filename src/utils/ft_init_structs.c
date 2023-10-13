@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_structs.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:01:46 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/12 16:52:03 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/13 13:51:24 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ void	ft_init_textures(t_tinfo *tinfo)
 	memset(&tinfo->east, 0, sizeof(t_data));
 }
 
+void	ft_init_map(t_map *map)
+{
+	map->n_col = 0;
+	map->n_lines = 0;
+	map->is_map_allocated = 0;
+}
+
 void	ft_init_structs(t_root *root)
 {
 	t_tinfo		*tinfo;
@@ -68,9 +75,8 @@ void	ft_init_structs(t_root *root)
 	root->error_msg = NULL;
 	ft_init_colors(root->tinfo);
 	ft_init_textures(root->tinfo);
-	root->map->n_col = 0;
-	root->map->n_lines = 0;
 	ft_init_moves(root);
+	ft_init_map(root->map);
 	root->is_empty_file = false;
 	root->exit_success = 0;
 }

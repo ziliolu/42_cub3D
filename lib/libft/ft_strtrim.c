@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:11:50 by lpicoli-          #+#    #+#             */
-/*   Updated: 2023/10/10 13:10:08 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:36:03 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	int		start;
 	int		end;
 
+	
 	if (!s1 || !set)
 		return (NULL);
 	start = 0;
@@ -34,6 +35,23 @@ char	*ft_strtrim(char const *s1, char const *set)
 	return (trim_str);
 }
 
+//char *trim(char *s1)
+//{
+//    char *ret = ft_calloc(ft_strlen(s1), 1);
+//    int i = 0;
+//    int y = ft_strlen(s1) - 1;
+//    int k = 0;
+//    while (i < (int)ft_strlen(s1) && (s1[i] == ' ' || s1[i] == '\t'))
+//        i++;
+//
+//    if(s1[ft_strlen(s1) -1] == '\n')
+//        y--;
+//    while ((s1[y] == ' ' || s1[y] == '\t'))
+//		y--;
+//	while (i < y)
+//		ret[k++] = s1[i++];
+//    return (ret);
+//}
 /*int main()
 {
     char *trim_str = ft_strtrim("abqbc", "abc");
