@@ -225,5 +225,6 @@ void	set_player_y_axis(t_player *player, double plane_x,
 void	set_player_x_axis(t_player *player, double plane_y,
 			double dir_x, double angle);
 void	get_map_arr(t_map *map, int map_file);
+void	ft_panic_is_empty_file(t_root *root);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_identifiers.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:55:16 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/12 17:47:03 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:19:04 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,28 @@ bool	ft_verify_identifiers(char *str, t_root *root)
 {
 	int		i;
 	char	*tmp;
+	char	*tmp2;
 	char	*identifier;
 	char	*path;
 	bool	result;
 
 	tmp = ft_strtrim(str, "\n");
+	i = 0;
+	//printf("tmp: -%s-\n", tmp);
+	tmp2 = ft_strtrim(tmp, " ");
+	free(tmp);
+	//printf("tmp2: -%s-\n", tmp2);
 	result = true;
 	i = 0;
-	while (tmp[i] && tmp[i] != ' ')
+	while (tmp2[i] && tmp2[i] != ' ')
 		i++;
-	identifier = ft_substr(tmp, 0, i);
-	while (tmp[i] && tmp[i] == ' ')
+	identifier = ft_substr(tmp2, 0, i);
+	while (tmp2[i] && tmp2[i] == ' ')
 		i++;
-	path = ft_substr(tmp, i, (ft_strlen(tmp) - i));
+	path = ft_substr(tmp2, i, (ft_strlen(tmp2) - i));
 	if (!ft_valid_identifier(identifier, path, root))
 		result = false;
-	free(tmp);
+	free(tmp2);
 	free(path);
 	free(identifier);
 	return (result);

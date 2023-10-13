@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:53:56 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/12 15:54:09 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/13 10:27:42 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ bool	ft_err(char *str, t_root *root)
 		printf("Error: %s: %s\n", str, root->error_msg);
 	else
 		printf("Error: %s\n", str);
-	ft_panic(root);
+	if(root->is_empty_file)
+        ft_panic_is_empty_file(root);
+    else
+		ft_panic(root);
 	return (false);
 }
 

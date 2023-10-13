@@ -4,7 +4,7 @@ LIB = lib.a
 OBJ = $(SRC:.c=.o)
 CC = cc
 CFLAGS = -Wextra -Werror -Wall -g -I./includes
-MLXFLAGS = -g -L./mlx  -lXext -lX11 -lmlx -lm -fsanitize=address
+MLXFLAGS = -g -L./mlx  -lXext -lX11 -lmlx -lm #-fsanitize=address
 RM = rm -f
 
 SRC =	./main.c									\

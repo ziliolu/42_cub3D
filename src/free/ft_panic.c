@@ -72,11 +72,30 @@ void	ft_free_minimap_imgs(t_root *root)
 	}
 }
 
+void ft_panic_is_empty_file(t_root *root)
+{
+    free(root->tinfo);
+    free(root->player);
+    ft_free_minimap_imgs(root);
+    if(root->mlx->mlx)
+        mlx_destroy_image(root->mlx->mlx, root->mlx->map.img);
+    if (root->mlx->win)
+        mlx_destroy_window(root->mlx->mlx, root->mlx->win);
+    if (root->mlx->mlx)
+    {
+        mlx_destroy_display(root->mlx->mlx);
+        free(root->mlx->mlx);
+    }
+    free(root->map);
+    free(root->mlx);
+    free(root->moves);
+    ft_free_rays(root->rays);
+    free(root);
+}
+
 int	ft_panic(t_root *root)
 {
 	free(root->player);
-	if (root->is_empty_file == true)
-		return (1);
 	ft_free_rays(root->rays);
 	ft_free_minimap_imgs(root);
 	ft_free_mlx(root);
@@ -92,3 +111,4 @@ int	ft_panic(t_root *root)
 	free(root);
 	return (0);
 }
+
