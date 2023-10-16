@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:53:56 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/13 13:40:03 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:12:30 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ double	ft_degrees_to_radians(double degrees)
 
 bool	ft_err(char *str, t_root *root)
 {
+	printf("Error: \n");
 	if (root->error_msg)
-		printf("Error: %s: %s\n", str, root->error_msg);
-	else
-		printf("Error: %s\n", str);
+		printf("%s: %s\n", str, root->error_msg);
+	else 
+		printf("%s\n", str);	
 	if(root->is_empty_file)
         ft_panic_is_empty_file(root);
     else

@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:20 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/13 13:45:21 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:13:27 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@
 # define INCOMPLETE_TEX_OR_COLOR_ERR "incomplete color or texture area"
 # define INVALID_TEX_OR_COLOR_ERR "invalid texture or color"
 # define INVALID_SPACES_OR_TABS "invalid space or tab"
-# define INVALID_MAP "invalid map"
-# define INVALID_EXTENSION "invalid extension"
-# define INVALID_FILE "invalid file"
+# define INVALID_MAP "Invalid map"
+# define INVALID_EXTENSION "Invalid extension"
+# define INVALID_FILE "Invalid file"
 
 typedef struct s_data
 {

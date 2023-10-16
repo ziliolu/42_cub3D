@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:31:17 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/13 13:48:07 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/16 14:49:33 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,9 @@ void	ft_free_mlx(t_root *root)
 	if (root->tinfo->south.img)
 		mlx_destroy_image(root->mlx->mlx, root->tinfo->south.img);
 	if (root->tinfo->east.img)
-		mlx_destroy_image(root->mlx->mlx, root->tinfo->west.img);
-	if (root->tinfo->west.img)
 		mlx_destroy_image(root->mlx->mlx, root->tinfo->east.img);
+	if (root->tinfo->west.img)
+		mlx_destroy_image(root->mlx->mlx, root->tinfo->west.img);
 	if (root->mlx->win)
 		mlx_destroy_window(root->mlx->mlx, root->mlx->win);
 	if (root->mlx->mlx)
@@ -107,6 +107,7 @@ int	ft_panic(t_root *root)
 	free(root->map);
 	free(root->moves);
 	free(root);
+	unlink(MAP);
 	return (0);
 }
 
