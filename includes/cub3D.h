@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:20 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/16 14:13:27 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:16:29 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,5 +231,8 @@ void	set_player_x_axis(t_player *player, double plane_y,
 			double dir_x, double angle);
 void	get_map_arr(t_map *map, int map_file);
 void	ft_panic_is_empty_file(t_root *root);
-
+void	ft_free_rays(t_ray *rays);
+void	ft_free_double_arr(char **arr);
+void	ft_free_mlx(t_root *root);
+void	ft_free_minimap_imgs(t_root *root);
 #endif

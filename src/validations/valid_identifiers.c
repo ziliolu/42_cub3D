@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:55:16 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/13 11:34:54 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:12:51 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,20 @@ bool	ft_add_paths(char *id, char *path, t_tinfo *tinfo, t_mlx *mlx)
 	return (true);
 }
 
-char *trim(char *s1);
-
 bool	ft_verify_identifiers(char *str, t_root *root)
 {
 	int		i;
-	char	*tmp;
-    char    *tmp2;
+	char	*tmp2;
 	char	*identifier;
 	char	*path;
 	bool	result;
 
-    if(!ft_strcmp(str, "\n"))
-        return (true);
-    tmp = ft_strtrim(str, "\n");
-    tmp2 = ft_get_trimmed_line(tmp);
-    free(tmp);
-    i = 0;
-    result = true;
+	if (!ft_strcmp(str, "\n"))
+		return (true);
+	tmp2 = ft_get_trimmed_line(str);
+	printf("-%s-\n", tmp2);
+	i = 0;
+	result = true;
 	i = 0;
 	while (tmp2[i] && tmp2[i] != ' ')
 		i++;

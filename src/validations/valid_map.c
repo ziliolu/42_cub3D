@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:02:29 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/16 14:49:00 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/16 17:28:28 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_create_map_arr(t_map *map)
 	while (++i < map->n_lines)
 		map->map_arr[i] = calloc(sizeof(char), map->n_col + 1);
 	get_map_arr(map, map_file);
-	if(map_file > 0)
+	if (map_file > 0)
 		close(map_file); 
 }
 

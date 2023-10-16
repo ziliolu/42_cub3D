@@ -1,4 +1,4 @@
-NAME = cub3D
+NAME = Cub3D
 LIBDIR = ./lib/
 LIB = lib.a
 OBJ = $(SRC:.c=.o)
@@ -9,6 +9,7 @@ RM = rm -f
 
 SRC =	./main.c									\
 		./src/free/ft_panic.c						\
+		./src/free/ft_free.c						\
 		./src/validations/valid_file.c				\
 		./src/validations/valid_file_utils.c		\
 		./src/validations/valid_identifiers.c		\
