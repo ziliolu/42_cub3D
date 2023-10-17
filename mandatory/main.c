@@ -16,10 +16,10 @@ int	main(int argc, char **argv)
 {
 	t_root	*root;
 
+	if (argc != 2)
+		return (printf("Error\n")); 
 	root = malloc(sizeof(t_root));
 	ft_init_structs(root);
-	if (argc != 2)
-		return (ft_panic(root));
 	ft_create_map_image(root->mlx);
 	ft_create_minimap_images(root->mlx, root->map);
 	if (!ft_initial_validation(argv[1], root))

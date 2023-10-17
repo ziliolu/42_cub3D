@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algorithm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:38:47 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/12 16:32:33 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:55:26 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ void	until_hits_wall(t_root *root, t_ray *ray, t_map *map)
 			map->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		if (map->map_arr[map->map_y][map->map_x] == '1')
+		if (map->map_arr[map->map_y][map->map_x] && \
+		(map->map_arr[map->map_y][map->map_x] != '0' && \
+		!ft_is_player(map->map_arr[map->map_y][map->map_x])))
 			root->hit_wall = 1;
 	}
 }

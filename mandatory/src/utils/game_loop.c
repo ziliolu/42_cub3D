@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: riolivei <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:52:11 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/12 15:53:48 by riolivei         ###   ########.fr       */
+/*   Updated: 2023/10/17 18:47:43 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ void	check_colision(double x_value, double y_value, t_root *root)
 
 	x = (int)x_value;
 	y = (int)y_value;
-	if (root->map->map_arr[y][x] == '1')
-		return ;
-	root->player->x = x_value;
-	root->player->y = y_value;
+	if (root->map->map_arr[y][x] && (root->map->map_arr[y][x] == '0' ||
+		ft_is_player(root->map->map_arr[y][x])))
+	{
+		root->player->x = x_value;
+		root->player->y = y_value;
+	}
 }
 
 bool	ft_is_quadrant(int key_code, t_player *player, t_root *root)

@@ -30,7 +30,7 @@ double	ft_degrees_to_radians(double degrees)
 
 bool	ft_err(char *str, t_root *root)
 {
-	printf("Error: \n");
+	printf("Error:\n");
 	if (root->error_msg)
 		printf("%s: %s\n", str, root->error_msg);
 	else

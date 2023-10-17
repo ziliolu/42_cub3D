@@ -6,16 +6,16 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 16:12:20 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/16 17:16:29 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:20:00 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../lib/get_next_line/get_next_line.h"
-# include "../lib/libft/libft.h"
-# include "../mlx/mlx.h"
+# include "../../lib/get_next_line/get_next_line.h"
+# include "../../lib/libft/libft.h"
+# include "../../mlx/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdbool.h>

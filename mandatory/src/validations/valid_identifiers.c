@@ -6,7 +6,7 @@
 /*   By: lpicoli- <lpicoli-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 15:55:16 by riolivei          #+#    #+#             */
-/*   Updated: 2023/10/16 18:12:51 by lpicoli-         ###   ########.fr       */
+/*   Updated: 2023/10/16 18:23:03 by lpicoli-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ bool	ft_verify_identifiers(char *str, t_root *root)
 	if (!ft_strcmp(str, "\n"))
 		return (true);
 	tmp2 = ft_get_trimmed_line(str);
-	printf("-%s-\n", tmp2);
 	i = 0;
 	result = true;
 	i = 0;
