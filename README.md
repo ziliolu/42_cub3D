@@ -9,7 +9,7 @@ Welcome to the Cub3D project! Dive into the exciting world of raycasting and maz
 
 - [Ricardo Melo](https://github.com/reomelo) - **riolivei**
 - [Luiza Zilio](https://github.com/ziliolu) - **lpicoli-**
-- 
+
 ## Table of Contents
 - [Project Overview](#project-overview)
 - [Usage](#usage)
@@ -25,11 +25,11 @@ Let's get started on your journey of raycasting and maze exploration. Here's how
 
 1. Clone the repository:
   ```bash
-  git clone git@github.com:ziliolu/42_cub3d.git
+  git clone git@github.com:ziliolu/42_cub3D.git
   ```
 2. Navigate to the project directory and compile it:
   ```bash
-  cd 42_cub3d && make
+  cd 42_cub3D && make
   ```
 3. Choose a map from maps folder or test with your own map
   ```bash
