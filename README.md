@@ -7,7 +7,7 @@ Welcome to the Cub3D project! Dive into the exciting world of raycasting and maz
 ### 🤝 Authorship - Collaborative Work
 > We worked together to develop and enhance this project, sharing knowledge and experiences throughout the process :)
 
-- [Ivo Marques](https://github.com/Pastilhex) - **riolivei**
+- [Ricardo Melo](https://github.com/reomelo) - **riolivei**
 - [Luiza Zilio](https://github.com/ziliolu) - **lpicoli-**
 - 
 ## Table of Contents
@@ -48,15 +48,6 @@ Imagine DDA as your artist's brush, painting the pixels that make up our 3D worl
 Raycasting is a fascinating technique used in video games to create a 3D perspective. It simulates how light rays travel through a scene. In our game, the player emits rays in all directions, just like a flashlight illuminating the path ahead.
 
 As these rays hit walls, we calculate their lengths and angles, which ultimately create the illusion of depth. This is how you see the 3D maze, even though it's just a 2D grid. The rays cast the world around you, showing you what's near and far.
-
-## Bonus Features
-In addition to the core requirements, we've added extra excitement to the Cub3D experience:
-
-### Wall Collision Detection
-Our walls are solid! You can't walk through them. Try to pass through a wall, and you'll find yourself blocked.
-
-### Minimap
-Getting lost? Our minimap has got you covered. This handy feature provides an overhead view of the maze, helping you keep your bearings and navigate through the labyrinth.
 
 [Start Your Adventure](#usage)
 
