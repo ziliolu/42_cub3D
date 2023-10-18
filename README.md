@@ -7,7 +7,7 @@ Welcome to the Cub3D project! Dive into the exciting world of raycasting and maz
 ### 🤝 Authorship - Collaborative Work
 > We worked together to develop and enhance this project, sharing knowledge and experiences throughout the process :)
 
-- [Ivo Marques](https://github.com/Pastilhex) - **ialves-m**
+- [Ivo Marques](https://github.com/Pastilhex) - **riolivei**
 - [Luiza Zilio](https://github.com/ziliolu) - **lpicoli-**
 - 
 ## Table of Contents
@@ -23,11 +23,21 @@ Cub3D is more than just a game; it's a learning experience. Step into the shoes 
 ## Usage
 Let's get started on your journey of raycasting and maze exploration. Here's how:
 
-1. **Clone the Repository**: Begin by cloning this repository to your local machine.
-
-2. **Compile the Project**: Run the `make` command to compile the Cub3D project.
-
-3. **Launch the Game**: Execute the program with `./cub3D map.cub`, where `map.cub` is your custom configuration file.
+1. Clone the repository:
+  ```bash
+  git clone git@github.com:ziliolu/42_cub3d.git
+  ```
+2. Navigate to the project directory and compile it:
+  ```bash
+  cd 42_cub3d && make
+  ```
+3. Choose a map from maps folder or test with your own map
+  ```bash
+ ./cub3D maps/valid/subject_map.cub
+  ```
+  ```bash
+  ./cub3D path_to_your_own_map**
+  ```
 
 ## What is DDA?
 DDA stands for Digital Differential Analyzer, a mathematical algorithm used for generating lines, as we do in raycasting. In our context, DDA is the magic behind the scenes, helping us draw rays to create a 3D view of the maze.
