@@ -1,6 +1,6 @@
 # Cub3D
 
-![Cub3D Banner](cub3d_banner.png)
+![Cub3D Banner](https://github.com/ziliolu/42_cub3D/blob/main/cub3d_gif.mp4)
 
 Welcome to the Cub3D project! Dive into the exciting world of raycasting and maze exploration with our interactive game. Learn about the DDA algorithm and how raycasting works in this creative 3D environment.
 
