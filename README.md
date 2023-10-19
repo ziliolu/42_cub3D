@@ -44,13 +44,13 @@ Let's get started on your journey of raycasting and maze exploration. Here's how
  ./cub3D maps/valid/subject_map.cub
   ```
   ```bash
-  ./cub3D path_to_your_own_map**
+  ./cub3D path_to_your_own_map
   ```
 
 ## What is DDA?
 DDA stands for Digital Differential Analyzer, a mathematical algorithm used for generating lines, as we do in raycasting. In our context, DDA is the magic behind the scenes, helping us draw rays to create a 3D view of the maze.
 
-Imagine DDA as your artist's brush, painting the pixels that make up our 3D world. It's a step-by-step process, calculating the intersections between the rays and the walls. This allows us to simulate the play of light and shadows, making the maze come to life.
+Imagine DDA as your artist's brush, painting the pixels that make up our 3D world. It's a step-by-step process, calculating the intersections between the rays and the walls. It's the essential tool for drawing lines and shapes with precise, pixel-level accuracy. 
 
 ## How Raycasting Works
 Raycasting is a fascinating technique used in video games to create a 3D perspective. It simulates how light rays travel through a scene. In our game, the player emits rays in all directions, just like a flashlight illuminating the path ahead.
