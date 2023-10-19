@@ -9,8 +9,6 @@
 <p align="center">
   <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnZqdWpvMm9rYXZhcjVjaWppODVnOW51YzByNzc1dmxkaWZyMmxuMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lFddL2AhlVY9QC2YLI/giphy-downsized-large.gif" width="500" />
 </p>
-  
-![Cub3D Banner](https://github.com/ziliolu/42_cub3D/blob/main/cub3d_gif.mp4)
 
 Welcome to the Cub3D project! Dive into the exciting world of raycasting and maze exploration with our interactive game. Learn about the DDA algorithm and how raycasting works in this creative 3D environment.
 
