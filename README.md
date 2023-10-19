@@ -23,8 +23,7 @@ Welcome to the Cub3D project! Dive into the exciting world of raycasting and maz
 - [Usage](#usage)
 - [What is DDA?](#what-is-dda)
 - [How Raycasting Works](#how-raycasting-works)
-- [Bonus Features](#bonus-features)
-
+  
 ## Project Overview
 Cub3D is more than just a game; it's a learning experience. Step into the shoes of a maze explorer and immerse yourself in the world of raycasting. Use your skills to navigate through a 3D maze, all while gaining an understanding of the DDA algorithm.
 The project was entirely written in C and [MiniLibX library](https://harm-smits.github.io/42docs/libs/minilibx/introduction.html) was used for graphic rendering.
