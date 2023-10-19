@@ -8,7 +8,7 @@
 </p>
 <p align="center">
 
-  <iframe src="https://giphy.com/embed/lFddL2AhlVY9QC2YLI" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/lFddL2AhlVY9QC2YLI">via GIPHY</a>
+  <div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/lFddL2AhlVY9QC2YLI" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/lFddL2AhlVY9QC2YLI">via GIPHY</a></p>
 </p>
   
 ![Cub3D Banner](https://github.com/ziliolu/42_cub3D/blob/main/cub3d_gif.mp4)
