@@ -1,5 +1,14 @@
 # Cub3D
 
+<p align="center">
+  <img src="https://img.shields.io/github/languages/top/ziliolu/42_cub3D?color=#FFFFFF&style=flat-square" />
+  <img src="https://img.shields.io/badge/score-103%20%2F%20100-success?color=#FFFFFF&style=flat-square" />
+  <img src="https://img.shields.io/badge/status-finished-success?color=#FFFFFF&style=flat-square" />
+  <img src="https://img.shields.io/github/last-commit/ziliolu/42_cub3D?color=#FFFFFF&style=flat-square" />
+</p>
+<p align="center">
+  <img src="https://github.com/ziliolu/42_cub3D/blob/main/cub3d_gif.mp4" width="500" />
+</p>
 ![Cub3D Banner](https://github.com/ziliolu/42_cub3D/blob/main/cub3d_gif.mp4)
 
 Welcome to the Cub3D project! Dive into the exciting world of raycasting and maze exploration with our interactive game. Learn about the DDA algorithm and how raycasting works in this creative 3D environment.
