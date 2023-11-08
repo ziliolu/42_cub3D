@@ -57,7 +57,4 @@ Let's get started on your journey of raycasting and maze exploration. Here's how
   ./cub3D path_to_your_own_map
   ```
 
-
-[Start Your Adventure](#usage)
-
 ![Cub3D Screenshot](cub3d_screenshot.png)
